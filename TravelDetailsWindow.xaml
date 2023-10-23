@@ -198,6 +198,17 @@ FontWeight="Black"
 Foreground="MediumSlateBlue"
 
 />
+        <ComboBox 
+       Grid.Row="2"
+       Grid.Column="3"
+       Grid.ColumnSpan="1"
+       Margin="15 20 15 20"
+       Background="MintCream"
+       />
+
+
+
+
         <Label
 Grid.Column="2"
 Grid.Row="6"
