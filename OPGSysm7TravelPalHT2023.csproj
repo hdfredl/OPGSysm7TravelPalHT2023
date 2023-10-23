@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="Enums\" />
     <Folder Include="StaticList\" />
   </ItemGroup>
 

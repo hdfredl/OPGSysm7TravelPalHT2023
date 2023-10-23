@@ -114,8 +114,8 @@ BorderThickness="2"
         Grid.ColumnSpan="2"
         Background="White"
         CornerRadius="10"
-                BorderBrush="MediumSlateBlue"
-BorderThickness="2"
+        BorderBrush="MediumSlateBlue"
+        BorderThickness="2"
         Margin="20">
             <PasswordBox 
         Grid.Column="3"
