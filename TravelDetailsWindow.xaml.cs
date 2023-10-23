@@ -25,8 +25,8 @@ namespace OPGSysm7TravelPalHT2023
         private void btnGoBack(object sender, RoutedEventArgs e)
         {
 
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow();
-            travelDetailsWindow.Show();
+            TravelsWindow travelsWindow = new TravelsWindow();
+            travelsWindow.Show();
             Close();
         }
 
