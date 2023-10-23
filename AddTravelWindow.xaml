@@ -88,9 +88,8 @@
             <Button Content="Add destination"
             Foreground="MintCream"
             Background="Transparent"
-                    Click="btnSave"
-            BorderThickness="0">
-            </Button>
+                    Click="btnSaveNAdd"
+            BorderThickness="0" Height="26" VerticalAlignment="Top"/>
         </Border>
 
 
@@ -103,7 +102,7 @@
             <Button Content="Sign out"
         Foreground="MediumSlateBlue"
         Background="Transparent"
-                   
+                   Click="btnSignOut"
         BorderThickness="0">
             </Button>
         </Border>
@@ -364,8 +363,7 @@ CornerRadius="10">
 Foreground="MintCream"
 Background="Transparent"
    Click="btnRemoveFromPacklist"
-BorderThickness="0">
-            </Button>
+BorderThickness="0"/>
         </Border>
 
 

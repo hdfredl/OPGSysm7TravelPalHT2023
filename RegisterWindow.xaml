@@ -135,10 +135,7 @@ BorderThickness="2"
             Foreground="MintCream"
             Background="Transparent"
                     Click="btnRegister"
-            BorderThickness="0">
-
-
-            </Button>
+            BorderThickness="0"/>
         </Border>
 
 

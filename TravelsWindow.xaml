@@ -87,9 +87,8 @@
             <Button Content="User"
             Foreground="MintCream"
             Background="Transparent"
-                    
-            BorderThickness="0">
-            </Button>
+                    Click="btnUserDetailsWindow"
+            BorderThickness="0"/>
         </Border>
 
 
@@ -101,7 +100,7 @@
         <Button Content="Add Travel"
         Foreground="MintCream"
         Background="Transparent"
-                   
+                   Click="btnOpenAddTravelWindow"
         BorderThickness="0">
         </Button>
         </Border>
@@ -114,9 +113,8 @@
             <Button Content="Details"
         Foreground="MintCream"
         Background="Transparent"
-                   
-        BorderThickness="0">
-            </Button>
+                   Click="btnDetailsWindow"
+        BorderThickness="0"/>
         </Border>
 
         <Border Grid.Row="6"
@@ -127,7 +125,7 @@
             <Button Content="Help"
         Foreground="MintCream"
         Background="Transparent"
-                   
+                   Click="btnHelpInfo"
         BorderThickness="0">
             </Button>
         </Border>
@@ -140,9 +138,8 @@
             <Button Content="Sign out"
         Foreground="MediumSlateBlue"
         Background="Transparent"
-                   
-        BorderThickness="0">
-            </Button>
+                   Click="btnSignOut"
+        BorderThickness="0"/>
         </Border>
 
         <Border Grid.Row="1"
@@ -166,7 +163,7 @@
             <Button Content="Remove"
         Foreground="MintCream"
         Background="Transparent"
-           
+           Click="btnRemove"
         BorderThickness="0">
             </Button>
         </Border>

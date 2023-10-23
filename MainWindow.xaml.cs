@@ -15,11 +15,21 @@ namespace OPGSysm7TravelPalHT2023
         private void btnLogIn(object sender, RoutedEventArgs e)
         {
 
+
+
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow();
+            travelDetailsWindow.Show();
+            Close();
+
         }
 
         private void btnRegister(object sender, RoutedEventArgs e)
         {
 
+
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            Close();
         }
     }
 }

@@ -25,6 +25,28 @@ namespace OPGSysm7TravelPalHT2023
         private void btnGoBack(object sender, RoutedEventArgs e)
         {
 
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow();
+            travelDetailsWindow.Show();
+            Close();
+        }
+
+        private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddToPacklist(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSignOut(object sender, RoutedEventArgs e)
+        {
+
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }
