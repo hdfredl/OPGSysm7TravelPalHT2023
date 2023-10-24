@@ -38,14 +38,30 @@ public static class UserManager
     {
         foreach (IUser user in Users)
         {
-            if (user.Username == username && user.Password == password)
+            if (user.Username == username && user.Password.ToString() == password)
             {
                 signInUser = user;
                 return true;
             }
         }
         return false;
+
     }
+
+    public static IUser AuthenticateUser(string username, string password) // Ser om användaren skriver in rätt användarnamn och lösenord.
+    {
+        foreach (IUser user in Users) // Ändrat denna, se om det funkar för Users listan
+        {
+            if (user.Username == username && user.Password == password) // <-- här skrev jag 
+            {
+                signInUser = user;
+                return user; // Se om denna funkar
+            }
+        }
+
+        return null;
+    }
+
     static UserManager()
     {
         Users.Add(new Admin

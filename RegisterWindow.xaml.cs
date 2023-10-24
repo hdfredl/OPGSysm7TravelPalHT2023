@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using OPGSysm7TravelPalHT2023.Classes;
 using OPGSysm7TravelPalHT2023.Enums;
 
@@ -11,14 +10,14 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class RegisterWindow : Window
 {
 
-    private List<IUser> Users;
+
 
     //private EuropeanCountry european;
     //private Countries countries2;
-    public RegisterWindow(List<IUser> Users) // List<IUser> users
+    public RegisterWindow() // List<IUser> users
     {
         InitializeComponent();
-        this.Users = Users;
+
 
         foreach (Countries countries in Countries.GetValues(typeof(Countries)))
         {
@@ -31,7 +30,7 @@ public partial class RegisterWindow : Window
     private void btnRegister(object sender, RoutedEventArgs e)
     {
         string username = txtUsername.Text.Trim();
-        string password = txtPasswordBox.ToString().Trim();
+        string password = txtPasswordBox.Password.ToString().Trim();
         Countries selectedCountry1 = (Countries)cbCitizenOfBothEnumLists.SelectedItem;   // ++ EuropeanCountry selectedEuropreanCountry = (EuropeanCountry)cbCitizenOfBothEnumLists.SelectedItem;
 
         if (IsUsernameTaken(username))
