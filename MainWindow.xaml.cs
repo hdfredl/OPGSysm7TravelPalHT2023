@@ -34,6 +34,7 @@ public partial class MainWindow : Window
                      new Travel("Nice", Countries.United_States, EuropeanCountry.France, 0, DateTime.Now, DateTime.UtcNow)
                     }
             };
+            // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
 
 
             // LÄgger till ny user.. hmm 

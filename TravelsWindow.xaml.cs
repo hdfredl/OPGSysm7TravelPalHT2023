@@ -65,6 +65,7 @@ public partial class TravelsWindow : Window
 
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
     {
+        // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
 
         TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow();
         travelDetailsWindow.Show();
