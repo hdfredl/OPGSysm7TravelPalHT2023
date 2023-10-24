@@ -50,7 +50,7 @@
         <Label
       Grid.Column="1"
       Grid.Row="1"
-      Content="DISP. user"
+      Name="lblUser"
       VerticalAlignment="Center"
       HorizontalAlignment="Center"
       FontFamily="Arial"

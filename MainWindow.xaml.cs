@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using OPGSysm7TravelPalHT2023.Classes;
 
 namespace OPGSysm7TravelPalHT2023
 {
@@ -7,9 +9,12 @@ namespace OPGSysm7TravelPalHT2023
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+
+
         }
 
         private void btnLogIn(object sender, RoutedEventArgs e)
@@ -26,8 +31,8 @@ namespace OPGSysm7TravelPalHT2023
         private void btnRegister(object sender, RoutedEventArgs e)
         {
 
-
-            RegisterWindow registerWindow = new RegisterWindow();
+            List<IUser> Users = new List<IUser>();
+            RegisterWindow registerWindow = new RegisterWindow(Users);
             registerWindow.Show();
             Close();
         }

@@ -89,14 +89,14 @@
     Foreground="MediumSlateBlue"
     FontFamily="Arial"
 />
-        <Border Grid.Column="3"
+        <!--<Border Grid.Column="3"
         Grid.Row="3"
         Grid.ColumnSpan="2"
         Background="White"
         CornerRadius="10"
                 BorderBrush="MediumSlateBlue"
 BorderThickness="2"
-        Margin="20">
+        Margin="20">-->
             <TextBox 
         Grid.Column="3"
         Grid.Row="3"
@@ -106,17 +106,17 @@ BorderThickness="2"
         Margin="20"
                 
             />
-        </Border>
+        <!--</Border>-->
 
 
-        <Border Grid.Column="3"
+        <!--<Border Grid.Column="3"
         Grid.Row="4"
         Grid.ColumnSpan="2"
         Background="White"
         CornerRadius="10"
         BorderBrush="MediumSlateBlue"
         BorderThickness="2"
-        Margin="20">
+        Margin="20">-->
             <PasswordBox 
         Grid.Column="3"
         Grid.Row="4"
@@ -125,7 +125,7 @@ BorderThickness="2"
         FontSize="20"
         Margin="20"
             />
-        </Border>
+        <!--</Border>-->
 
         <Border Grid.Row="5"
         Grid.Column="2"

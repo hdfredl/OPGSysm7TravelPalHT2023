@@ -8,7 +8,7 @@ public interface IUser
 
     public string Password { get; set; }
 
-    public EuropeanCountry EuropeanCountry { get; set; }
+    //public EuropeanCountry EuropeanCountry { get; set; }
 
     public Countries CountriesWorldWide { get; set; }
 
