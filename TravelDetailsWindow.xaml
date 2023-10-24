@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGSysm7TravelPalHT2023"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="MediumSlateBlue">
+        Title="MainWindow" Height="475" Width="830" Background="MediumSlateBlue" MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -88,6 +88,7 @@
             Foreground="MintCream"
             Background="Transparent"
                     Click="btnSave"
+                    Visibility="Hidden"
             BorderThickness="0">
             </Button>
         </Border>
@@ -129,6 +130,7 @@
         CornerRadius="10">
             <Button Content="Admin Only"
         Foreground="MediumSlateBlue"
+                    Visibility="Hidden"
         Background="Transparent"
            
         BorderThickness="0">
@@ -150,7 +152,7 @@
         <Label
     Grid.Column="2"
     Grid.Row="3"
-    Content="City"
+    Content="Destination"
     VerticalAlignment="Center"
     HorizontalAlignment="Center"
     FontFamily="Arial"
@@ -196,13 +198,7 @@ FontWeight="Black"
 Foreground="MediumSlateBlue"
 
 />
-        <ComboBox 
-       Grid.Row="2"
-       Grid.Column="3"
-       Grid.ColumnSpan="1"
-       Margin="15 20 15 20"
-       Background="MintCream"
-       />
+      
 
 
 
@@ -247,6 +243,23 @@ Foreground="MediumSlateBlue"
 />
 
 
+        <Border Grid.Row="2"
+ Grid.Column="3"
+ Margin="0 20 0 20"
+ BorderBrush="MediumSlateBlue"
+ BorderThickness="2"
+ CornerRadius="10">
+            <TextBox Background="MintCream"
+      BorderThickness="0"
+              Name="txtCategory"
+              IsReadOnly="True"
+      Width="100">
+
+                <!-- TextBox content and properties -->
+            </TextBox>
+        </Border>
+
+
         <Border Grid.Row="3"
         Grid.Column="3"
         Margin="0 20 0 20"
@@ -255,7 +268,8 @@ Foreground="MediumSlateBlue"
         CornerRadius="10">
             <TextBox Background="MintCream"
              BorderThickness="0"
-                     Name="txtCity"
+                     Name="txtDestination"
+                     IsReadOnly="True"
              Width="100">
                 
                 <!-- TextBox content and properties -->
@@ -270,6 +284,7 @@ BorderThickness="2"
 CornerRadius="10">
             <TextBox Background="MintCream"
      BorderThickness="0"
+                     IsReadOnly="True"
                      Name="txtCountry"
      Width="100">
                 <!-- TextBox content and properties -->
@@ -284,6 +299,7 @@ BorderThickness="2"
 CornerRadius="10">
             <TextBox Background="MintCream"
      BorderThickness="0"
+                     IsReadOnly="True"
                      Name="txtTravelers"
      Width="100">
                 <!-- TextBox content and properties -->
@@ -331,6 +347,7 @@ CornerRadius="10">
  Foreground="MintCream"
  Background="Transparent"
     Click="btnAddToPacklist"
+                    Visibility="Hidden"
  BorderThickness="0"/>
         </Border>
         <Border Grid.Row="5"
@@ -340,6 +357,7 @@ Background="MediumSlateBlue"
 CornerRadius="10">
             <Button Content="Remove from list"
 Foreground="MintCream"
+                    Visibility="Hidden"
 Background="Transparent"
    Click="btnRemoveFromPacklist"
 BorderThickness="0"/>
@@ -357,6 +375,7 @@ BorderThickness="0"/>
             <DatePickerTextBox Background="MintCream"
                       BorderThickness="0"
                                Name="txtStartDate"
+                               IsReadOnly="True"
                       Width="100">
                 <!-- DatePickerTextBox content and properties -->
             </DatePickerTextBox>
@@ -371,6 +390,7 @@ BorderThickness="0"/>
             <DatePickerTextBox Background="MintCream"
                       BorderThickness="0"
                                Name="txtEndDate"
+                               IsReadOnly="True"
                       Width="100">
                 <!-- DatePickerTextBox content and properties -->
             </DatePickerTextBox>

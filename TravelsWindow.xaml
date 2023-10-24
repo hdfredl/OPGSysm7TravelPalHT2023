@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGSysm7TravelPalHT2023"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="MediumSlateBlue">
+        Title="MainWindow" Height="475" Width="830" Background="MediumSlateBlue" MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -150,7 +150,8 @@
             <Button Content="Admin Only"
         Foreground="MediumSlateBlue"
         Background="Transparent"
-           
+           Name="btnAdminMode"
+                    Visibility="Hidden"
         BorderThickness="0">
             </Button>
         </Border>
@@ -176,10 +177,25 @@
         BorderThickness="5"
                 Margin="15"
         CornerRadius="10">
-            
-            <ListViewItem>
-                <!-- ListViewItem content and properties / Binding etc -->
-            </ListViewItem>
+
+            <ListView Grid.Column="3"
+Grid.Row="2"
+Grid.ColumnSpan="1"
+Grid.RowSpan="5"
+Name="lstTravels">
+                <ListView.View>
+                    <GridView>
+                        
+                        <GridViewColumn Width="200" Header="Depart to Destination" DisplayMemberBinding="{Binding Destination}"/>
+
+                        <GridViewColumn Width="100" Header="Travel days" DisplayMemberBinding="{Binding TravelDays}"/>
+                        <GridViewColumn Width="75" Header="Start date" DisplayMemberBinding="{Binding StartDate}"/>
+                        <GridViewColumn Width="75" Header="End date" DisplayMemberBinding="{Binding EndDate}"/>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
 
 

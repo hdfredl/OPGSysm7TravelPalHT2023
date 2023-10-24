@@ -59,7 +59,7 @@ public static class UserManager
             }
         }
 
-        return null;
+        return null!;
     }
 
     static UserManager()
@@ -68,6 +68,7 @@ public static class UserManager
         {
             Username = "admin",
             Password = "adminpassword",
+            adminRole = AdminRole.Admin,
             CountriesWorldWide = Countries.United_States
         });
     }

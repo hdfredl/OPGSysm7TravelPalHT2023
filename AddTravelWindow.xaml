@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGSysm7TravelPalHT2023"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="MediumSlateBlue">
+         Title="MainWindow" Height="475" Width="830" Background="MediumSlateBlue"  MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -136,7 +136,7 @@
         <Label
     Grid.Column="1"
     Grid.Row="3"
-    Content="City"
+    Content="Destination"
     VerticalAlignment="Center"
     HorizontalAlignment="Center"
     FontFamily="Arial"
@@ -164,6 +164,7 @@ Foreground="MediumSlateBlue"
  Grid.ColumnSpan="1"
  Margin="15 20 15 20"
  Background="MintCream"
+            Name="cbEUorCountries"
  />
 
         <Label
@@ -197,12 +198,14 @@ Foreground="MediumSlateBlue"
        Grid.ColumnSpan="1"
        Margin="15 20 15 20"
        Background="MintCream"
+            Name="cbCategory"
        />
         <CheckBox 
             Grid.Column="3"
             Grid.Row="3"
             Content="All inclusive"
              Margin="10"
+            Name="checkBoxAllInclusive"
             />
 
 
@@ -212,8 +215,17 @@ Foreground="MediumSlateBlue"
     Content="Meetin Details"
             Margin="10"
             VerticalAlignment="Center"
-    
+    Name="checkBoxMeetingDetails"
     />
+        <CheckBox 
+Grid.Column="3"
+Grid.Row="4"
+Content="Non EU countries"
+            Name="checkBoxNonEUCountries"
+        Margin="10"
+        VerticalAlignment="Center"
+
+/>
 
 
 
@@ -324,7 +336,7 @@ CornerRadius="10">
         <CheckBox 
   Grid.Column="4"
   Grid.Row="5"
-          
+          Name="checkBoxTravelDocument"
   Content="Travel document"
           Margin="10"
           VerticalAlignment="Top"
@@ -333,7 +345,7 @@ CornerRadius="10">
         <CheckBox 
   Grid.Column="4"
   Grid.Row="5"
-          
+          Name="checkBoxRequired"
   Content="Required"
           Margin="10"
           VerticalAlignment="Bottom"
