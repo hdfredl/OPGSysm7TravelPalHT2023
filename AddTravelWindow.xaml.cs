@@ -16,13 +16,13 @@ namespace OPGSysm7TravelPalHT2023
 
             CategoryBox();
 
+            CountryBox();
+
+
             //var allCountries = new List<object>(Enum.GetValues(typeof(Countries)).Cast<object>());
             //allCountries.AddRange(Enum.GetValues(typeof(EuropeanCountry)).Cast<object>());
 
             //cbEUorCountries.ItemsSource = allCountries;
-
-            CountryBox();
-
         }
 
         private void CategoryBox()
@@ -41,7 +41,7 @@ namespace OPGSysm7TravelPalHT2023
         private void CountryBox()
         {
             cbEUorCountries.Items.Add("Country");
-            foreach (Countries countries in Enum.GetValues(typeof(Countries)))
+            foreach (EuropeanCountry countries in Enum.GetValues(typeof(EuropeanCountry)))
             {
                 ListViewItem item = new();
                 item.Content = countries.ToString();
