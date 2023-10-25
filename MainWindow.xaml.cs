@@ -16,6 +16,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
+
+
         IUser existingUser = UserManager.AuthenticateUser("user", "password"); // Starta en ny user som ska ha 2 resor tillagda hårdkodade.
 
         if (existingUser == null)
@@ -26,21 +28,27 @@ public partial class MainWindow : Window
                 Username = "user",
                 Password = "password",
                 adminRole = AdminRole.User, // Inte Admin role, bara vanlig user.
+
                 CountriesWorldWide = Countries.United_States,
                 EuropeanCountry = EuropeanCountry.Sweden,
-                Destinations = new List<Travel> // Får se över denna sen, lade till denna nu för att släcka error.
-                    {
-                     new Travel("Stockholm", Countries.United_States, EuropeanCountry.Sweden, 0, DateTime.Now, DateTime.Today),
-                     new Travel("Nice", Countries.United_States, EuropeanCountry.France, 0, DateTime.Now, DateTime.UtcNow)
-                    }
+                // Lägg till travelers, Work trip/Vacation + (meeting details/Allinclusive)
             };
+
+            newUser.Destinations = new List<Travel> // Lägger till denna user med denna info som sen displayas i TravelDetailsWindow.
+                    {
+                     new Travel("Washington", Countries.United_States, EuropeanCountry.Sweden,WorkOrVacation.AllInclusive ,2, DateTime.Today, DateTime.Now), // Destination, TravelCountry, OriginCountry, Travellers, Starttime, Endtime
+                     new Travel("Nice", Countries.France, EuropeanCountry.France,WorkOrVacation.MeetingDetails , 5, DateTime.Now, DateTime.Now)
+                    };
+            foreach (Travel travel in newUser.Destinations)
+            {
+                TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
+            }
+
             // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
 
-
-            // LÄgger till ny user.. hmm 
+            // LÄgger till ny user
             UserManager.AddUser(newUser);
         }
-
 
     }
 

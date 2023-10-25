@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
 using OPGSysm7TravelPalHT2023.Enums;
 
@@ -10,9 +10,12 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelsWindow : Window
 {
+
     public TravelsWindow()
     {
         InitializeComponent();
+
+
 
         if (UserManager.signInUser != null)
         {
@@ -24,32 +27,33 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
-        if (UserManager.signInUser != null)
-        {
-            lstTravels.ItemsSource = UserManager.signInUser.Destinations; // lägger till Destinations i lstTravels..
-        }
+        //if (UserManager.signInUser != null)
+        //{
+        //    lstTravels.ItemsSource = UserManager.signInUser.Destinations; // lägger till Destinations i lstTravels..
+        //}
 
+        lstTravels.ItemsSource = TravelManager.Travels; // lägger till Destinations i lstTravels.
+
+        UpdateUI();
 
     }
 
     private void btnRemove(object sender, RoutedEventArgs e)
     {
-        IUser deleteTravel = lstTravels.SelectedItem as IUser;
-        if (UserManager.signInUser.adminRole == AdminRole.Admin || deleteTravel.Username == UserManager.signInUser.Username) // låter user och admin få möjligheten att slänga en resa
-        {       // Vänster om ||: Admin får slänga. Höger om ||: vanlig user får slänga.
-            List<IUser> users = lstTravels.ItemsSource as List<IUser>;
 
-            if (users != null)
+        Travel deleteTravel = lstTravels.SelectedItem as Travel;
+        //ListViewItem selectedItem = (ListViewItem)lstTravels.SelectedItem;
+        //Travel deleteTravel = (Travel)selectedItem.Tag;
+
+        if (deleteTravel != null)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this travel?", "Confirmation", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this travel?", "Confirmation", MessageBoxButton.YesNo);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    UserManager.Users.Remove(deleteTravel);
-                    lstTravels.Items.Refresh();
-                }
+                TravelManager.RemoveTravel(deleteTravel); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
+                //lstTravels.Items.Remove(selectedItem);
             }
-
         }
         else
         {
@@ -67,9 +71,14 @@ public partial class TravelsWindow : Window
     {
         // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
 
-        TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow();
-        travelDetailsWindow.Show();
-        Close();
+        if (lstTravels.SelectedItem != null)
+        {
+            Travel selectedTravel = lstTravels.SelectedItem as Travel;
+
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
+            travelDetailsWindow.Show();
+            Close();
+        }
     }
 
     private void btnOpenAddTravelWindow(object sender, RoutedEventArgs e)
@@ -84,7 +93,7 @@ public partial class TravelsWindow : Window
 
     private void btnUserDetailsWindow(object sender, RoutedEventArgs e)
     {
-        // nice to have, avvakta lite här.. 
+        // NICE TO HAVE, AVVAKTA HÄR LITE..
     }
 
     private void btnSignOut(object sender, RoutedEventArgs e)
@@ -94,4 +103,33 @@ public partial class TravelsWindow : Window
         Close();
 
     }
+
+    private void UpdateUI()
+    {
+
+        //lstTravels.Items.Clear();
+        foreach (Travel travel in TravelManager.Travels)
+        {
+            ListViewItem item = new();
+            item.Content = travel.Destination;
+            item.Tag = travel;
+            //lstTravels.Items.Add(item); <- Kraschar programmet när man kör den. 
+
+        }
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+// Tillhör btnRemove sen om.. 
+// if (UserManager.signInUser != null && (UserManager.signInUser.adminRole == AdminRole.Admin || (deleteTravel != null && deleteTravel.Username == UserManager.signInUser.Username))) // låter user och admin få möjligheten att slänga en resa //  UserManager.signInUser.adminRole == AdminRole.Admin || deleteTravel.Username == UserManager.signInUser.Username
+// {       // Vänster om ||: Admin får slänga. Höger om ||: vanlig user får slänga.
+//List<Travel> destinations = UserManager.signInUser.Destinations as List<Travel>;

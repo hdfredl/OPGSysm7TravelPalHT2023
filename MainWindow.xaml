@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGSysm7TravelPalHT2023"
         mc:Ignorable="d"
-        Title="MainWindow" Height="475" Width="830" Background="MediumSlateBlue" MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="450" Width="800" Background="MediumSlateBlue">
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="MediumSlateBlue"/>

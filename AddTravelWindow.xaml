@@ -224,7 +224,7 @@ Content="Non EU countries"
             Name="checkBoxNonEUCountries"
         Margin="10"
         VerticalAlignment="Center"
-
+        Checked="checkBoxNonEUCountries_Checked"      
 />
 
 

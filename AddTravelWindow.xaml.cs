@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023
 {
@@ -10,6 +13,55 @@ namespace OPGSysm7TravelPalHT2023
         public AddTravelWindow()
         {
             InitializeComponent();
+
+            CategoryBox();
+
+            //var allCountries = new List<object>(Enum.GetValues(typeof(Countries)).Cast<object>());
+            //allCountries.AddRange(Enum.GetValues(typeof(EuropeanCountry)).Cast<object>());
+
+            //cbEUorCountries.ItemsSource = allCountries;
+
+            CountryBox();
+
+        }
+
+        private void CategoryBox()
+        {
+            cbCategory.Items.Add("Trip Category");
+            foreach (WorkOrVacation workOrVacation in Enum.GetValues(typeof(WorkOrVacation)))
+            {
+                ListViewItem item = new();
+                item.Content = workOrVacation.ToString();
+                item.Tag = workOrVacation;
+                cbCategory.Items.Add(item);
+            }
+            cbCategory.SelectedIndex = 0;
+        }
+
+        private void CountryBox()
+        {
+            cbEUorCountries.Items.Add("Country");
+            foreach (Countries countries in Enum.GetValues(typeof(Countries)))
+            {
+                ListViewItem item = new();
+                item.Content = countries.ToString();
+                item.Tag = countries;
+                cbEUorCountries.Items.Add(item);
+            }
+            cbEUorCountries.SelectedIndex = 0;
+        }
+        private void checkBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
+        {
+            if (checkBoxNonEUCountries.IsChecked == true)
+            {
+                // Handle the checkbox being checked.
+                cbEUorCountries.SelectedItem = EuropeanCountry.Sweden;
+            }
+            else
+            {
+                // Handle the checkbox being unchecked.
+                cbEUorCountries.SelectedItem = Countries.United_States;
+            }
         }
 
         private void btnAddToPacklist(object sender, RoutedEventArgs e)
@@ -44,5 +96,7 @@ namespace OPGSysm7TravelPalHT2023
             mainWindow.Show();
             Close();
         }
+
+
     }
 }

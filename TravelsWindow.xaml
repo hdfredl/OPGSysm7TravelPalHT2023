@@ -182,6 +182,7 @@
 Grid.Row="2"
 Grid.ColumnSpan="1"
 Grid.RowSpan="5"
+            DisplayMemberPath="Destination" 
 Name="lstTravels">
                 <ListView.View>
                     <GridView>

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using OPGSysm7TravelPalHT2023.Classes;
 namespace OPGSysm7TravelPalHT2023;
 
 /// <summary>
@@ -7,9 +7,19 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelDetailsWindow : Window
 {
-    public TravelDetailsWindow()
+
+    public TravelDetailsWindow(Travel travel)
     {
         InitializeComponent();
+
+        txtCategory.Text = travel.WorkOrVacation.ToString();
+        txtDestination.Text = travel.Destination;
+        txtCountry.Text = travel.Countries.ToString();
+        txtTravelers.Text = travel.Travelers.ToString();
+        txtStartDate.Text = travel.StartDate.ToString();
+        txtEndDate.Text = travel.EndDate.ToString();
+        txtBio.Text = travel.GetInfo().ToString();
+
     }
 
     private void btnSave(object sender, RoutedEventArgs e)

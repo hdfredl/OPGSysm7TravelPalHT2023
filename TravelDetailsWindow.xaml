@@ -241,6 +241,18 @@ FontWeight="Black"
 Foreground="MediumSlateBlue"
 
 />
+        <Label
+Grid.Column="4"
+Grid.Row="3"
+Content="Bio"
+VerticalAlignment="Top"
+HorizontalAlignment="Center"
+FontFamily="Arial"
+FontSize="15"
+FontWeight="Black"
+Foreground="MediumSlateBlue"
+
+/>
 
 
         <Border Grid.Row="2"
@@ -254,6 +266,24 @@ Foreground="MediumSlateBlue"
               Name="txtCategory"
               IsReadOnly="True"
       Width="100">
+
+                <!-- TextBox content and properties -->
+            </TextBox>
+        </Border>
+
+        <Border Grid.Row="3"
+Grid.Column="4"
+Margin="10 20 10 20"
+               Grid.RowSpan="2" 
+BorderBrush="MediumSlateBlue"
+BorderThickness="2"
+CornerRadius="10">
+            <TextBox Background="MintCream"
+     BorderThickness="0"
+             Name="txtBio"
+                     TextWrapping="Wrap"
+             IsReadOnly="True"
+     Width="100">
 
                 <!-- TextBox content and properties -->
             </TextBox>
@@ -324,9 +354,9 @@ CornerRadius="10">
             </TextBox>
         </Border>
 
-        <Border Grid.Column="4"
+        <Border Grid.Column="5"
 Grid.Row="3"
-Grid.ColumnSpan="2"
+Grid.ColumnSpan="1"
 Grid.RowSpan="2"
 BorderBrush="MediumSlateBlue"
 BorderThickness="2"
