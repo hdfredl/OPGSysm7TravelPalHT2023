@@ -107,7 +107,6 @@ public partial class AddTravelWindow : Window
 
             WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag; //Hämtar ut Enumlistan WorkorVacation 
 
-
             // Väljer ut land antingen från EuropreanCountry eller från Countries(non-EU)
             object selectedCountry = cbEUorCountries.SelectedItem;
             Countries countries = 0; // satte dessa på 0 för att släcka error..
@@ -124,7 +123,6 @@ public partial class AddTravelWindow : Window
 
             DateTime startDate = new DateTime();
             DateTime endDate = new DateTime();
-
 
             if (int.TryParse(txtTravelers.Text, out travellers))
             {
@@ -148,14 +146,9 @@ public partial class AddTravelWindow : Window
                 else
                 {
                     MessageBox.Show("Please fill in all boxes to continue, Warning");
-
                 }
             }
-
         }
-        //TravelsWindow travelsWindow = new TravelsWindow();
-        //travelsWindow.Show();
-        //Close();
     }
 
 

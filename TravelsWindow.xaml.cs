@@ -10,7 +10,6 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelsWindow : Window
 {
-
     public TravelsWindow()
     {
         InitializeComponent();
@@ -27,14 +26,6 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
-
-
-
-        //if (UserManager.signInUser != null)
-        //{
-        //    lstTravels.ItemsSource = UserManager.signInUser.Destinations; // lägger till Destinations i lstTravels..
-        //}
-
         if (UserManager.signInUser != null)
         {
             lstTravels.ItemsSource = TravelManager.Travels;
@@ -49,6 +40,7 @@ public partial class TravelsWindow : Window
     private void btnRemove(object sender, RoutedEventArgs e)
     {
 
+        // Travel deleteTravel = lstTravels.SelectedItem as Travel;
         Travel deleteTravel = lstTravels.SelectedItem as Travel;
         //ListViewItem selectedItem = (ListViewItem)lstTravels.SelectedItem;
         //Travel deleteTravel = (Travel)selectedItem.Tag;
@@ -60,13 +52,15 @@ public partial class TravelsWindow : Window
             if (result == MessageBoxResult.Yes)
             {
                 TravelManager.RemoveTravel(deleteTravel); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
-                //lstTravels.Items.Remove(selectedItem);
+                //lstTravels.Items.Remove(deleteTravel);
             }
         }
         else
         {
             MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
         }
+
+        // TODO: Updatera listan så traveln försvinner
 
     }
 
@@ -86,6 +80,10 @@ public partial class TravelsWindow : Window
             TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
             travelDetailsWindow.Show();
             Close();
+        }
+        else
+        {
+            MessageBox.Show("Select a travel to view details.", "Warning", MessageBoxButton.OK);
         }
     }
 
@@ -121,23 +119,10 @@ public partial class TravelsWindow : Window
             ListViewItem item = new();
             item.Content = travel.Destination;
             item.Tag = travel;
-            //lstTravels.Items.Add(item); <- Kraschar programmet när man kör den. 
+            /* lstTravels.Items.Add(item); *///< -Kraschar programmet när man kör den.
 
         }
 
     }
 }
 
-
-
-
-
-
-
-
-
-
-// Tillhör btnRemove sen om.. 
-// if (UserManager.signInUser != null && (UserManager.signInUser.adminRole == AdminRole.Admin || (deleteTravel != null && deleteTravel.Username == UserManager.signInUser.Username))) // låter user och admin få möjligheten att slänga en resa //  UserManager.signInUser.adminRole == AdminRole.Admin || deleteTravel.Username == UserManager.signInUser.Username
-// {       // Vänster om ||: Admin får slänga. Höger om ||: vanlig user får slänga.
-//List<Travel> destinations = UserManager.signInUser.Destinations as List<Travel>;
