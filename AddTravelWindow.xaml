@@ -198,13 +198,14 @@ Foreground="MediumSlateBlue"
        Grid.ColumnSpan="1"
        Margin="15 20 15 20"
        Background="MintCream"
-            Name="cbCategory"
+            Name="cbCategory" SelectionChanged="cbCategory_SelectionChanged"
        />
         <CheckBox 
             Grid.Column="3"
             Grid.Row="3"
             Content="All inclusive"
              Margin="10"
+            Visibility="Collapsed"
             Name="checkBoxAllInclusive"
             />
 
@@ -213,6 +214,7 @@ Foreground="MediumSlateBlue"
     Grid.Column="3"
     Grid.Row="3"
     Content="Meetin Details"
+            Visibility="Collapsed"
             Margin="10"
             VerticalAlignment="Center"
     Name="checkBoxMeetingDetails"
@@ -224,7 +226,8 @@ Content="Non EU countries"
             Name="checkBoxNonEUCountries"
         Margin="10"
         VerticalAlignment="Center"
-        Checked="checkBoxNonEUCountries_Checked"      
+        Checked="checkBoxNonEUCountries_Checked"     
+            Unchecked="unCheckBoxNonEUCountries_Checked"
 />
 
 
@@ -319,9 +322,9 @@ CornerRadius="10">
             </TextBox>
         </Border>
 
-        <Border Grid.Column="4"
+        <Border Grid.Column="5"
 Grid.Row="3"
-Grid.ColumnSpan="2"
+Grid.ColumnSpan="1"
 Grid.RowSpan="2"
 BorderBrush="MediumSlateBlue"
 BorderThickness="2"
@@ -332,6 +335,41 @@ CornerRadius="10">
                 <!-- ListViewItem content and properties / Binding etc -->
             </ListViewItem>
         </Border>
+
+        <Label
+Grid.Column="4"
+Grid.Row="3"
+Content="Meeting details"
+VerticalAlignment="Top"
+HorizontalAlignment="Center"
+FontFamily="Arial"
+FontSize="15"
+FontWeight="Black"
+Foreground="MediumSlateBlue"
+            Name="txtBoxMeetingDetails"
+            Visibility="Collapsed"
+
+/>
+
+        <Border Grid.Row="3"
+    Grid.Column="4"
+                Grid.RowSpan="2"
+    Margin="0 20 0 20"
+    BorderBrush="MediumSlateBlue"
+    BorderThickness="2"
+                Name="borderMeetingDetails"
+                Visibility="Collapsed"
+    CornerRadius="10">
+            <TextBox Background="MintCream"
+         BorderThickness="0"
+                 Name="txtMeetingDetails"
+                     Visibility="Collapsed"
+         Width="100">
+
+                <!-- TextBox content and properties -->
+            </TextBox>
+        </Border>
+
 
         <CheckBox 
   Grid.Column="4"
@@ -380,6 +418,7 @@ BorderThickness="0"/>
 
 
 
+        
 
         <Border Grid.Column="2"
         Grid.Row="6"
@@ -387,12 +426,12 @@ BorderThickness="0"/>
         BorderBrush="MediumSlateBlue"
         BorderThickness="2"
         CornerRadius="10">
-            <DatePickerTextBox Background="MintCream"
+            <DatePicker Background="MintCream"
                       BorderThickness="0"
                                Name="txtStartDate"
                       Width="100">
                 <!-- DatePickerTextBox content and properties -->
-            </DatePickerTextBox>
+            </DatePicker>
         </Border>
 
         <Border Grid.Column="4"
@@ -401,12 +440,12 @@ BorderThickness="0"/>
         BorderBrush="MediumSlateBlue"
         BorderThickness="2"
         CornerRadius="10">
-            <DatePickerTextBox Background="MintCream"
+            <DatePicker Background="MintCream"
                       BorderThickness="0"
                                Name="txtEndDate"
                       Width="100">
                 <!-- DatePickerTextBox content and properties -->
-            </DatePickerTextBox>
+            </DatePicker>
         </Border>
 
 

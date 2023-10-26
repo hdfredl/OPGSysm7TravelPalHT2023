@@ -10,6 +10,7 @@ public class Travel
     public Countries Countries { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
+    public string Info { get; set; }
     //public List<PackingListItem> PackingList { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -28,12 +29,13 @@ public class Travel
 
     //}
 
-    public Travel(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
+    public Travel(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
     {
         Destination = destination;
         Countries = country;
         EuropeanCountry = europeanCountry;
         Travelers = travellers;
+        Info = getInfo;
         WorkOrVacation = workorvacation;
         //PackingList = packingList;
         StartDate = startDate;
@@ -54,8 +56,8 @@ public class Travel
     {
         public string MeetingDetails { get; set; }  // string MeetingDetails
 
-        public WorkTrip(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails)
-            : base(destination, country, europeanCountry, workorvacation, travellers, startDate, endDate) // packingList,
+        public WorkTrip(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails)
+            : base(destination, country, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate) // packingList,
         {
             MeetingDetails = meetingDetails;
         }
@@ -73,8 +75,8 @@ public class Travel
     {
         public bool AllInclusive { get; set; } // bool AllInclusive
 
-        public Vacation(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive)
-            : base(destination, country, europeanCountry, workorvacation, travellers, startDate, endDate) //packingList,
+        public Vacation(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive)
+            : base(destination, country, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate) //packingList,
         {
             AllInclusive = allInclusive;
         }

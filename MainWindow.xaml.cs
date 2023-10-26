@@ -36,8 +36,8 @@ public partial class MainWindow : Window
 
             newUser.Destinations = new List<Travel> // Lägger till denna user med denna info som sen displayas i TravelDetailsWindow.
                     {
-                     new Travel("Washington", Countries.United_States, EuropeanCountry.Sweden,WorkOrVacation.AllInclusive ,2, DateTime.Today, DateTime.Now), // Destination, TravelCountry, OriginCountry, Travellers, Starttime, Endtime
-                     new Travel("Nice", Countries.France, EuropeanCountry.France,WorkOrVacation.MeetingDetails , 5, DateTime.Now, DateTime.Now)
+                     new Travel("Washington", Countries.United_States, EuropeanCountry.Sweden,WorkOrVacation.Vacation ,2, "",DateTime.Today, DateTime.Now), // Destination, TravelCountry, OriginCountry, Travellers, Starttime, Endtime
+                     new Travel("Nice", Countries.France, EuropeanCountry.France,WorkOrVacation.WorkTrip , 5,"" , DateTime.Now, DateTime.Now)
                     };
             foreach (Travel travel in newUser.Destinations)
             {

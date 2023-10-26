@@ -27,12 +27,20 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
+
+
+
         //if (UserManager.signInUser != null)
         //{
         //    lstTravels.ItemsSource = UserManager.signInUser.Destinations; // lägger till Destinations i lstTravels..
         //}
 
-        lstTravels.ItemsSource = TravelManager.Travels; // lägger till Destinations i lstTravels.
+        if (UserManager.signInUser != null)
+        {
+            lstTravels.ItemsSource = TravelManager.Travels;
+        }
+
+        /*lstTravels.ItemsSource = TravelManager.Travels;*/ // lägger till Destinations i lstTravels.
 
         UpdateUI();
 

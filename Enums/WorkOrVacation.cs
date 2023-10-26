@@ -2,6 +2,6 @@
 
 public enum WorkOrVacation
 {
-    AllInclusive,
-    MeetingDetails
+    Vacation,
+    WorkTrip
 }
