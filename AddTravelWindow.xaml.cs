@@ -31,7 +31,7 @@ public partial class AddTravelWindow : Window
 
     private void CategoryBox()
     {
-        cbCategory.Items.Add(new ComboBoxItem { Content = "Trip Category" });
+        //cbCategory.Items.Add(new ComboBoxItem { Content = "Trip Category" }); //{ Content = "Trip Category" }
         foreach (WorkOrVacation workOrVacation in Enum.GetValues(typeof(WorkOrVacation)))
         {
             ComboBoxItem item = new(); // ListViewItem
@@ -98,105 +98,68 @@ public partial class AddTravelWindow : Window
 
     private void btnSaveNAdd(object sender, RoutedEventArgs e)
     {
-        //string destination = txtCity.Text;
-        //int travellers;
-        //string getInfo = txtMeetingDetails.Text;
-        //WorkOrVacation workorvacation = (WorkOrVacation)cbCategory.SelectedItem; // WorkOrVacation workorvacation = (WorkOrVacation)cbCategory.SelectedItem; // (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
-        //EuropeanCountry europeanCountry = (EuropeanCountry)cbEUorCountries.SelectedItem;  /// (EuropeanCountry)((ComboBoxItem)cbEUorCountries.SelectedItem).Tag;
-        //Countries countries = (Countries)((ComboBoxItem)cbEUorCountries.SelectedItem).Tag; // Countries countries = (Countries)cbEUorCountries.SelectedItem;
-        //DateTime startDate = new DateTime();
-        //DateTime endDate = new DateTime();
-
-        //if (int.TryParse(txtTravelers.Text, out travellers))
-        //{
-        //    if (destination != "" && travellers != 0 && cbCategory.SelectedIndex > -1 && cbEUorCountries.SelectedIndex > -1)
-        //    {
-        //        Travel newTravel = new(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
-
-        //        newTravel.Destination = destination;
-        //        newTravel.Travelers = travellers;
-        //        newTravel.Info = getInfo;
-        //        newTravel.WorkOrVacation = workorvacation;
-        //        newTravel.EuropeanCountry = europeanCountry;
-        //        newTravel.Countries = countries;
-        //        newTravel.StartDate = startDate;
-        //        newTravel.EndDate = endDate;
-
-        //        TravelManager.Travels.Add(newTravel);
-
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Please fill in all boxes to continue, Warning");
-        //    }
-
-        //    TravelsWindow travelsWindow = new TravelsWindow();
-        //    travelsWindow.Show();
-        //    Close();
-
-        //}
-        string destination = txtCity.Text;
-        int travellers;
-        string getInfo = txtMeetingDetails.Text;
-
-        //Hämtar ut Enumlistan WorkorVacation 
-        WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
-
-        // Väljer ut land antingen från EuropreanCountry eller från Countries(non-EU)
-        object selectedCountry = cbEUorCountries.SelectedItem;
-        Countries countries = 0; // satte dessa på 0 för att släcka error..
-        EuropeanCountry europeanCountry = 0;
-
-        if (selectedCountry is EuropeanCountry)
+        bool keepAddding = true;
+        while (keepAddding)
         {
-            europeanCountry = (EuropeanCountry)selectedCountry;
-        }
-        else if (selectedCountry is Countries)
-        {
-            countries = (Countries)selectedCountry;
-        }
-        ////   switch (selectedCountry)
-        //{
-        //    case EuropeanCountry european:
-        //        europeanCountry = european;
-        //        break;
-        //    case Countries country:
-        //        countries = country;
-        //        break;
-        //    default:
+            string destination = txtCity.Text;
+            int travellers;
+            string getInfo = txtMeetingDetails.Text;
 
-        //        break;
+            WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag; //Hämtar ut Enumlistan WorkorVacation 
 
 
-        DateTime startDate = new DateTime();
-        DateTime endDate = new DateTime();
+            // Väljer ut land antingen från EuropreanCountry eller från Countries(non-EU)
+            object selectedCountry = cbEUorCountries.SelectedItem;
+            Countries countries = 0; // satte dessa på 0 för att släcka error..
+            EuropeanCountry europeanCountry = 0;
 
-        if (int.TryParse(txtTravelers.Text, out travellers))
-        {
-            if (destination != "" && travellers != 0 && cbCategory.SelectedIndex > 0 && cbEUorCountries.SelectedIndex > 0)
+            if (selectedCountry is EuropeanCountry)
             {
-                Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
-
-                newTravel.Destination = destination;
-                newTravel.Travelers = travellers;
-                newTravel.Info = getInfo;
-                newTravel.WorkOrVacation = workorvacation;
-                newTravel.StartDate = startDate;
-                newTravel.EndDate = endDate;
-
-                TravelManager.Travels.Add(newTravel);
+                europeanCountry = (EuropeanCountry)selectedCountry;
             }
-            else
+            else if (selectedCountry is Countries)
             {
-                MessageBox.Show("Please fill in all boxes to continue, Warning");
+                countries = (Countries)selectedCountry;
             }
 
-            TravelsWindow travelsWindow = new TravelsWindow();
-            travelsWindow.Show();
-            Close();
-        }
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
 
+
+            if (int.TryParse(txtTravelers.Text, out travellers))
+            {
+                if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && cbCategory.SelectedIndex > 0
+                {
+                    Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
+
+                    newTravel.Destination = destination;
+                    newTravel.Travelers = travellers;
+                    newTravel.Info = getInfo;
+                    newTravel.WorkOrVacation = workorvacation;
+                    newTravel.StartDate = startDate;
+                    newTravel.EndDate = endDate;
+
+                    TravelManager.Travels.Add(newTravel);
+                    keepAddding = false;
+                    TravelsWindow travelsWindow = new TravelsWindow();
+                    travelsWindow.Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please fill in all boxes to continue, Warning");
+
+                }
+            }
+
+        }
+        //TravelsWindow travelsWindow = new TravelsWindow();
+        //travelsWindow.Show();
+        //Close();
     }
+
+
+
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
@@ -245,3 +208,4 @@ public partial class AddTravelWindow : Window
 
     }
 }
+

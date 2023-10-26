@@ -31,7 +31,7 @@ public partial class MainWindow : Window
 
                 CountriesWorldWide = Countries.United_States,
                 EuropeanCountry = EuropeanCountry.Sweden,
-                // Lägg till travelers, Work trip/Vacation + (meeting details/Allinclusive)
+
             };
 
             newUser.Destinations = new List<Travel> // Lägger till denna user med denna info som sen displayas i TravelDetailsWindow.
@@ -48,8 +48,8 @@ public partial class MainWindow : Window
 
             // LÄgger till ny user
             UserManager.AddUser(newUser);
-        }
 
+        }
     }
 
     private void btnLogIn(object sender, RoutedEventArgs e)
@@ -62,6 +62,11 @@ public partial class MainWindow : Window
         {
             UserManager.signInUser = user; // Ser vem som loggar in
             MessageBox.Show("Login successful.");
+            TravelManager.Reset();
+            foreach (Travel travel in user.Destinations)
+            {
+                TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
+            }
             TravelsWindow travelsWindow = new TravelsWindow();
             travelsWindow.Show();
             Close();
@@ -81,3 +86,4 @@ public partial class MainWindow : Window
         Close();
     }
 }
+

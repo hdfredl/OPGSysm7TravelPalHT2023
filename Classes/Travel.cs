@@ -7,6 +7,7 @@ namespace OPGSysm7TravelPalHT2023.Classes;
 public class Travel
 {
     public string? Destination { get; set; }
+
     public Countries Countries { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
