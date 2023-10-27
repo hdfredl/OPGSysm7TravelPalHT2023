@@ -14,7 +14,7 @@ public class Travel
     public string Info { get; set; }
     //public List<PackingListItem> PackingList { get; set; }
     public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateTime EndDate { get; set; } // Ändra sen..
     public WorkOrVacation WorkOrVacation { get; set; }
     public int TravelDays { get; set; }
 

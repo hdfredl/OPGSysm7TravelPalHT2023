@@ -72,6 +72,7 @@ public static class UserManager
             CountriesWorldWide = Countries.United_States
         });
 
+
         //IUser existingUser = UserManager.AuthenticateUser("user", "password"); // Starta en ny user som ska ha 2 resor tillagda hårdkodade.
 
         //if (existingUser == null)

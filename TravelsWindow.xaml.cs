@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
 using OPGSysm7TravelPalHT2023.Enums;
@@ -10,6 +11,7 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelsWindow : Window
 {
+
     public TravelsWindow()
     {
         InitializeComponent();
@@ -26,12 +28,12 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
-        if (UserManager.signInUser != null)
-        {
-            lstTravels.ItemsSource = TravelManager.Travels;
-        }
+        //if (UserManager.signInUser != null)
+        //{
+        //    lstTravels.ItemsSource = TravelManager.Travels;
+        //}
 
-        /*lstTravels.ItemsSource = TravelManager.Travels;*/ // lägger till Destinations i lstTravels.
+        /* lstTravels.ItemsSource = TravelManager.Travels; */// lägger till Destinations i lstTravels.
 
         UpdateUI();
 
@@ -39,27 +41,31 @@ public partial class TravelsWindow : Window
 
     private void btnRemove(object sender, RoutedEventArgs e)
     {
-
-        // Travel deleteTravel = lstTravels.SelectedItem as Travel;
-        Travel deleteTravel = lstTravels.SelectedItem as Travel;
-        //ListViewItem selectedItem = (ListViewItem)lstTravels.SelectedItem;
-        //Travel deleteTravel = (Travel)selectedItem.Tag;
-
-        if (deleteTravel != null)
+        try
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this travel?", "Confirmation", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.Yes)
+            ListViewItem? selectedItem = lstTravels.SelectedItem as ListViewItem;
+            //ListViewItem? deleteTravel = lstTravels.SelectedItem as ListViewItem;
+            if (selectedItem != null)
             {
-                TravelManager.RemoveTravel(deleteTravel); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
-                //lstTravels.Items.Remove(deleteTravel);
-            }
-        }
-        else
-        {
-            MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
-        }
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this travel?", "Confirmation", MessageBoxButton.YesNo);
 
+                if (result == MessageBoxResult.Yes)
+                {
+                    Travel removeTravel = (Travel)selectedItem.Tag; // Se över denna med ALBIN
+                    TravelManager.RemoveTravel(removeTravel); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
+                                                              //lstTravels.Items.Remove(deleteTravel);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
+            }
+
+        }
+        catch (NullReferenceException message)
+        {
+            MessageBox.Show(message.Message);
+        }
         // TODO: Updatera listan så traveln försvinner
 
     }
@@ -75,7 +81,7 @@ public partial class TravelsWindow : Window
 
         if (lstTravels.SelectedItem != null)
         {
-            Travel selectedTravel = lstTravels.SelectedItem as Travel;
+            Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
             TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
             travelDetailsWindow.Show();
@@ -113,13 +119,13 @@ public partial class TravelsWindow : Window
     private void UpdateUI()
     {
 
-        //lstTravels.Items.Clear();
+        lstTravels.Items.Clear();
         foreach (Travel travel in TravelManager.Travels)
         {
-            ListViewItem item = new();
+            ListViewItem item = new ListViewItem();
             item.Content = travel.Destination;
             item.Tag = travel;
-            /* lstTravels.Items.Add(item); *///< -Kraschar programmet när man kör den.
+            lstTravels.Items.Add(item); //< -Kraschar programmet när man kör den.
 
         }
 
