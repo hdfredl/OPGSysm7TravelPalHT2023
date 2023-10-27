@@ -28,10 +28,10 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
-        //if (UserManager.signInUser != null)
-        //{
-        //    lstTravels.ItemsSource = TravelManager.Travels;
-        //}
+        if (UserManager.signInUser != null)
+        {
+            lstTravels.ItemsSource = TravelManager.Travels;
+        }
 
         /* lstTravels.ItemsSource = TravelManager.Travels; */// lägger till Destinations i lstTravels.
 
@@ -43,7 +43,7 @@ public partial class TravelsWindow : Window
     {
         try
         {
-            ListViewItem? selectedItem = lstTravels.SelectedItem as ListViewItem;
+            Travel? selectedItem = lstTravels.SelectedItem as Travel;
             //ListViewItem? deleteTravel = lstTravels.SelectedItem as ListViewItem;
             if (selectedItem != null)
             {
@@ -51,8 +51,8 @@ public partial class TravelsWindow : Window
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Travel removeTravel = (Travel)selectedItem.Tag; // Se över denna med ALBIN
-                    TravelManager.RemoveTravel(removeTravel); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
+                    /* Travel removeTravel = (Travel)selectedItem.Tag;*/ // Se över denna med ALBIN
+                    TravelManager.RemoveTravel(selectedItem); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
                                                               //lstTravels.Items.Remove(deleteTravel);
                 }
             }
@@ -81,6 +81,7 @@ public partial class TravelsWindow : Window
 
         if (lstTravels.SelectedItem != null)
         {
+
             Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
             TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
@@ -119,13 +120,13 @@ public partial class TravelsWindow : Window
     private void UpdateUI()
     {
 
-        lstTravels.Items.Clear();
+        //lstTravels.Items.Clear();
         foreach (Travel travel in TravelManager.Travels)
         {
             ListViewItem item = new ListViewItem();
             item.Content = travel.Destination;
             item.Tag = travel;
-            lstTravels.Items.Add(item); //< -Kraschar programmet när man kör den.
+            /*lstTravels.Items.Add(item);*/ //< -Kraschar programmet när man kör den.
 
         }
 
