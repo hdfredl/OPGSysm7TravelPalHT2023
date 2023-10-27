@@ -62,7 +62,7 @@
 
 
 
-        <!--<Border Grid.Column="1"
+        <Border Grid.Column="1"
         Grid.ColumnSpan="5"
         Grid.Row="2"
         Grid.RowSpan="5"
@@ -76,7 +76,7 @@
                 Background="MintCream"
                 Margin="10"
         ></Canvas>
-        </Border>-->
+        </Border>
 
 
         <Border Grid.Row="6"

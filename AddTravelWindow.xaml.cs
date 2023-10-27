@@ -16,13 +16,18 @@ public partial class AddTravelWindow : Window
     {
         InitializeComponent();
 
+        if (UserManager.signInUser != null)
+        {
+            lblUser.Content = UserManager.signInUser.Username;
+        }
+
         CategoryBox();
 
         CountryBox();
 
         UpdateCountryComboBox(EuropeanCountry.Sweden);
 
-        // Attach event handlers for CheckBox.
+        //  Lägger in check eller unchecked event för Chheckbox
         checkBoxNonEUCountries.Checked += checkBoxNonEUCountries_Checked;
         checkBoxNonEUCountries.Unchecked += unCheckBoxNonEUCountries_Checked;
 
@@ -59,10 +64,10 @@ public partial class AddTravelWindow : Window
     {
         cbEUorCountries.Items.Clear();
 
-        // Add enum values based on the selected list (EuropeanCountry or Countries).
+        //  Lägger till Enum( länder) beroende på vilken lista man väljer
         if (selectedCountry.GetType() == typeof(EuropeanCountry))
         {
-            foreach (var country in Enum.GetValues(typeof(EuropeanCountry)))
+            foreach (var country in Enum.GetValues(typeof(EuropeanCountry))) // Laddar in ny enum lista i combobox
             {
                 cbEUorCountries.Items.Add(country);
             }
@@ -79,11 +84,11 @@ public partial class AddTravelWindow : Window
 
     private void checkBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
     {
-        UpdateCountryComboBox(Countries.United_States);
+        UpdateCountryComboBox(Countries.United_States); // om checkad så öppnas Countries enum lista.
     }
     private void unCheckBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
     {
-        UpdateCountryComboBox(EuropeanCountry.Sweden);
+        UpdateCountryComboBox(EuropeanCountry.Sweden); // Ocheckad är EU länderna.
     }
 
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
@@ -123,18 +128,24 @@ public partial class AddTravelWindow : Window
                     countries = (Countries)selectedCountry;
                 }
 
-                DateTime startDate = new DateTime();
-                DateTime endDate = new DateTime();
+                DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
+                DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
+
 
                 if (int.TryParse(txtTravelers.Text, out travellers))
                 {
-                    if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None)
+                    if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
+                        // Create the Travel object with AllInclusive and MeetingDetails
                         Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
+                        //{
+                        //    AllInclusive = checkBoxAllInclusive.IsChecked ?? false,
+
+                        //};
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;
-                        newTravel.Info = getInfo;
+                        newTravel.MeetingDetails = getInfo;
                         newTravel.WorkOrVacation = workorvacation;
                         newTravel.StartDate = startDate;
                         newTravel.EndDate = endDate;
@@ -149,19 +160,22 @@ public partial class AddTravelWindow : Window
                     else
                     {
                         MessageBox.Show("Please fill in all boxes to continue, Warning");
-                        break; // Add a break statement to exit the loop when the conditions are not met.
+                        break;
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid number for travelers.", "Warning");
+                    break;
                 }
             }
         }
+
         catch (NullReferenceException message)
         {
             MessageBox.Show(message.Message);
         }
     }
-
-
-
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
@@ -184,7 +198,7 @@ public partial class AddTravelWindow : Window
 
         if (selectedItem.Content.ToString() == "WorkTrip")
         {
-            // Show Meeting Details input field and hide All Inclusive CheckBox
+            // Gör vissa detaljer synliga och andra ej beroende vad man checkar
             checkBoxMeetingDetails.Visibility = Visibility.Visible;
 
             checkBoxAllInclusive.Visibility = Visibility.Collapsed;
@@ -197,13 +211,17 @@ public partial class AddTravelWindow : Window
         }
         else if (selectedItem.Content.ToString() == "Vacation")
         {
-            // Show All Inclusive CheckBox and hide Meeting Details input field
+            // Gör vissa detaljer synliga och andra ej beroende vad man checkar
             checkBoxAllInclusive.Visibility = Visibility.Visible;
+
             txtMeetingDetails.Visibility = Visibility.Collapsed;
+
             checkBoxMeetingDetails.Visibility = Visibility.Collapsed;
 
             txtBoxMeetingDetails.Visibility = Visibility.Collapsed;
+
             txtMeetingDetails.Visibility = Visibility.Collapsed;
+
             borderMeetingDetails.Visibility = Visibility.Collapsed;
         }
 

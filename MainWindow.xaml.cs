@@ -16,8 +16,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-
-
         IUser existingUser = UserManager.AuthenticateUser("user", "password"); // Starta en ny user som ska ha 2 resor tillagda hårdkodade.
 
         if (existingUser == null)
@@ -31,7 +29,6 @@ public partial class MainWindow : Window
 
                 CountriesWorldWide = Countries.United_States,
                 EuropeanCountry = EuropeanCountry.Sweden,
-
             };
 
             newUser.Destinations = new List<Travel> // Lägger till denna user med denna info som sen displayas i TravelDetailsWindow.
@@ -73,7 +70,8 @@ public partial class MainWindow : Window
         }
         else
         {
-            MessageBox.Show("Wrong username or password. Please try again.");
+            //MessageBox.Show("Wrong username or password. Please try again.");
+            lblWrongUserPassword.Visibility = Visibility.Visible;
         }
     }
 

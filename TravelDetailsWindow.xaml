@@ -60,7 +60,7 @@
       
       />
 
-
+        <!--<CheckBox Name="checkBoxAllInclusive" Content="All Inclusive" />-->
 
         <Border Grid.Column="1"
         Grid.ColumnSpan="5"
@@ -244,7 +244,7 @@ Foreground="MediumSlateBlue"
         <Label
 Grid.Column="4"
 Grid.Row="3"
-Content="Bio"
+Content="Info"
 VerticalAlignment="Top"
 HorizontalAlignment="Center"
 FontFamily="Arial"

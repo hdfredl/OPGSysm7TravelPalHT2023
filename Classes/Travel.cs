@@ -11,12 +11,14 @@ public class Travel
     public Countries Countries { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
-    public string Info { get; set; }
+    //public string Info { get; set; }
     //public List<PackingListItem> PackingList { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; } // Ändra sen..
     public WorkOrVacation WorkOrVacation { get; set; }
     public int TravelDays { get; set; }
+    public bool AllInclusive { get; set; }
+    public string MeetingDetails { get; set; }
 
     //public class PackingListItem // Gör om sen kanske.... gjordes nu snabbt för att släcka errors.
     //{
@@ -36,12 +38,13 @@ public class Travel
         Countries = country;
         EuropeanCountry = europeanCountry;
         Travelers = travellers;
-        Info = getInfo;
+        //Info = getInfo;
         WorkOrVacation = workorvacation;
         //PackingList = packingList;
         StartDate = startDate;
         EndDate = endDate;
         TravelDays = CalculateTravelDays();
+
     }
     public virtual string GetInfo()
     {
@@ -63,13 +66,13 @@ public class Travel
             MeetingDetails = meetingDetails;
         }
 
-        public override string GetInfo() // Overrida Travel
+        public override string GetInfo()
         {
-            //if (!string.IsNullOrEmpty(MeetingDetails))
-            //{
-            //    return $" HEllo boy {MeetingDetails}";
-            //}
-            return base.GetInfo() + $", Meeting Detais: HEllooo {MeetingDetails}";
+            if (!string.IsNullOrEmpty(MeetingDetails))
+            {
+                return base.GetInfo() + $", Meeting Details: {MeetingDetails}";
+            }
+            return base.GetInfo();
         }
     }
     public class Vacation : Travel // ärver från Travel // TODO: Vacation()
@@ -87,7 +90,7 @@ public class Travel
             string baseInfo = base.GetInfo();
             if (AllInclusive)
             {
-                return baseInfo + $",All insluive: yes";
+                return baseInfo + $",All inscluive: yes";
             }
             else
             {

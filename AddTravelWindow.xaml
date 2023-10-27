@@ -358,12 +358,15 @@ Foreground="MediumSlateBlue"
     BorderBrush="MediumSlateBlue"
     BorderThickness="2"
                 Name="borderMeetingDetails"
-                Visibility="Collapsed"
+                Visibility="Visible"
     CornerRadius="10">
             <TextBox Background="MintCream"
          BorderThickness="0"
+                     Grid.Row="3"
+                     Grid.Column="4"
+                     Grid.RowSpan="2"
                  Name="txtMeetingDetails"
-                     Visibility="Collapsed"
+                     Visibility="Visible"
          Width="100">
 
                 <!-- TextBox content and properties -->

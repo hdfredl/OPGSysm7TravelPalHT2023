@@ -12,11 +12,10 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class TravelsWindow : Window
 {
 
+
     public TravelsWindow()
     {
         InitializeComponent();
-
-
 
         if (UserManager.signInUser != null)
         {
@@ -33,13 +32,11 @@ public partial class TravelsWindow : Window
             lstTravels.ItemsSource = TravelManager.Travels;
         }
 
-        /* lstTravels.ItemsSource = TravelManager.Travels; */// lägger till Destinations i lstTravels.
-
         UpdateUI();
 
     }
 
-    private void btnRemove(object sender, RoutedEventArgs e)
+    private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
     {
         try
         {
@@ -72,7 +69,7 @@ public partial class TravelsWindow : Window
 
     private void btnHelpInfo(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("To Navigate through all the menu you can easily find back by push Go Back button", "Information");
+        MessageBox.Show("Press 'User' to edit an user \n Press 'Add Travel' to add more trips \n Press 'Details' to see more information about the trip \n Press 'Help' to see this window \n Press 'Remove' to delete a trip in your list ", "Information");
     }
 
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
@@ -81,7 +78,6 @@ public partial class TravelsWindow : Window
 
         if (lstTravels.SelectedItem != null)
         {
-
             Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
             TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
@@ -96,12 +92,9 @@ public partial class TravelsWindow : Window
 
     private void btnOpenAddTravelWindow(object sender, RoutedEventArgs e)
     {
-
-
         AddTravelWindow addTravelWindow = new AddTravelWindow();
         addTravelWindow.Show();
         Close();
-
     }
 
     private void btnUserDetailsWindow(object sender, RoutedEventArgs e)
@@ -114,12 +107,10 @@ public partial class TravelsWindow : Window
         MainWindow mainWindow = new MainWindow();
         mainWindow.Show();
         Close();
-
     }
 
     private void UpdateUI()
     {
-
         //lstTravels.Items.Clear();
         foreach (Travel travel in TravelManager.Travels)
         {
@@ -127,9 +118,7 @@ public partial class TravelsWindow : Window
             item.Content = travel.Destination;
             item.Tag = travel;
             /*lstTravels.Items.Add(item);*/ //< -Kraschar programmet när man kör den.
-
         }
-
     }
 }
 

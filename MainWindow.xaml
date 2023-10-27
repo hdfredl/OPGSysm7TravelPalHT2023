@@ -165,7 +165,8 @@ CornerRadius="10">
             Foreground="Red"
             VerticalAlignment="Center"
             FontFamily="Arial"
-  
+            Name="lblWrongUserPassword"
+  Visibility="Hidden"
             />
 
         <Label
