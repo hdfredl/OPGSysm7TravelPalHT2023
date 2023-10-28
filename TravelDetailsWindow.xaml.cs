@@ -9,13 +9,11 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class TravelDetailsWindow : Window
 {
     private Travel selectedTrip;
-
     public TravelDetailsWindow(Travel travel)
     {
         InitializeComponent();
 
         this.selectedTrip = travel;
-
 
         if (UserManager.signInUser != null)
         {
@@ -29,9 +27,19 @@ public partial class TravelDetailsWindow : Window
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
+    }
 
-
-
+    private void btnGoBack(object sender, RoutedEventArgs e)
+    {
+        TravelsWindow travelsWindow = new TravelsWindow();
+        travelsWindow.Show();
+        Close();
+    }
+    private void btnSignOut(object sender, RoutedEventArgs e)
+    {
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        Close();
     }
 
     private void btnSave(object sender, RoutedEventArgs e)
@@ -44,14 +52,6 @@ public partial class TravelDetailsWindow : Window
 
     }
 
-    private void btnGoBack(object sender, RoutedEventArgs e)
-    {
-
-        TravelsWindow travelsWindow = new TravelsWindow();
-        travelsWindow.Show();
-        Close();
-    }
-
     private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
     {
 
@@ -60,12 +60,5 @@ public partial class TravelDetailsWindow : Window
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
     {
 
-    }
-
-    private void btnSignOut(object sender, RoutedEventArgs e)
-    {
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.Show();
-        Close();
     }
 }

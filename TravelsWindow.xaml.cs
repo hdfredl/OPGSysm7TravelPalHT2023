@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
-using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023;
 
@@ -11,8 +10,6 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelsWindow : Window
 {
-
-
     public TravelsWindow()
     {
         InitializeComponent();
@@ -22,8 +19,9 @@ public partial class TravelsWindow : Window
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
         }
 
-        if (UserManager.signInUser != null && UserManager.signInUser.adminRole == AdminRole.Admin) // Skapat en enum till för att aktivera admin only knappen
+        if (UserManager.signInUser != null) // Skapat en enum till för att aktivera admin only knappen
         {
+            UserManager.AuthenticateAdmin("admin", "password");
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
@@ -97,11 +95,6 @@ public partial class TravelsWindow : Window
         Close();
     }
 
-    private void btnUserDetailsWindow(object sender, RoutedEventArgs e)
-    {
-        // NICE TO HAVE, AVVAKTA HÄR LITE..
-    }
-
     private void btnSignOut(object sender, RoutedEventArgs e)
     {
         MainWindow mainWindow = new MainWindow();
@@ -119,6 +112,19 @@ public partial class TravelsWindow : Window
             item.Tag = travel;
             /*lstTravels.Items.Add(item);*/ //< -Kraschar programmet när man kör den.
         }
+    }
+
+    private void btnUserDetailsWindow(object sender, RoutedEventArgs e)
+    {
+        // NICE TO HAVE, AVVAKTA HÄR LITE..
+    }
+
+    private void btnAdminOnly(object sender, RoutedEventArgs e)
+    {
+        AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow();
+        adminOnlyWindow.Show();
+        Close();
+
     }
 }
 

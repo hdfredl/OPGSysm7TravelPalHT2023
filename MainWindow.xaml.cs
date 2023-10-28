@@ -11,7 +11,6 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class MainWindow : Window
 {
-
     public MainWindow()
     {
         InitializeComponent();
@@ -25,7 +24,7 @@ public partial class MainWindow : Window
             {
                 Username = "user",
                 Password = "password",
-                adminRole = AdminRole.User, // Inte Admin role, bara vanlig user.
+                // adminRole = AdminRole.User, // Inte Admin role, bara vanlig user.
 
                 CountriesWorldWide = Countries.United_States,
                 EuropeanCountry = EuropeanCountry.Sweden,
@@ -40,9 +39,7 @@ public partial class MainWindow : Window
             {
                 TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
             }
-
             // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
-
             // LÄgger till ny user
             UserManager.AddUser(newUser);
 
@@ -77,7 +74,6 @@ public partial class MainWindow : Window
 
     private void btnRegister(object sender, RoutedEventArgs e)
     {
-
         // List<IUser> Users = new List<IUser>();
         RegisterWindow registerWindow = new RegisterWindow();
         registerWindow.Show();

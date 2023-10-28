@@ -1,11 +1,11 @@
-﻿<Window x:Class="OPGSysm7TravelPalHT2023.TravelsWindow"
+﻿<Window x:Class="OPGSysm7TravelPalHT2023.AdminOnlyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPGSysm7TravelPalHT2023"
         mc:Ignorable="d"
-        Title="MainWindow" Height="475" Width="830" Background="MediumSlateBlue" MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
+        Title="AdminOnlyWindow" Height="475" Width="830" Background="MediumSlateBlue" MinHeight="475" MaxWidth="830" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -79,34 +79,13 @@
         </Border>
 
 
-        <Border Grid.Row="6"
-        Grid.Column="1"
-        Margin="20"
-        Background="MediumSlateBlue"
-        CornerRadius="10">
-            <Button Content="User"
-            Foreground="MintCream"
-            Background="Transparent"
-                    Click="btnUserDetailsWindow"
-            BorderThickness="0"/>
-        </Border>
+     
 
+
+    
 
         <Border Grid.Row="6"
         Grid.Column="2"
-        Margin="20"
-        Background="MediumSlateBlue"
-        CornerRadius="10">
-        <Button Content="Add Travel"
-        Foreground="MintCream"
-        Background="Transparent"
-                   Click="btnOpenAddTravelWindow"
-        BorderThickness="0">
-        </Button>
-        </Border>
-        
-        <Border Grid.Row="6"
-        Grid.Column="3"
         Margin="20"
         Background="MediumSlateBlue"
         CornerRadius="10">
@@ -117,18 +96,7 @@
         BorderThickness="0"/>
         </Border>
 
-        <Border Grid.Row="6"
-        Grid.Column="4"
-        Margin="20"
-        Background="MediumSlateBlue"
-        CornerRadius="10">
-            <Button Content="Help"
-        Foreground="MintCream"
-        Background="Transparent"
-                   Click="btnHelpInfo"
-        BorderThickness="0">
-            </Button>
-        </Border>
+     
 
         <Border Grid.Row="1"
         Grid.Column="2"
@@ -147,18 +115,18 @@
         Margin="20"
         Background="MintCream"
         CornerRadius="10">
-            <Button Content="Admin Only"
+            <Button Content="Go back"
         Foreground="MediumSlateBlue"
         Background="Transparent"
-                    Click="btnAdminOnly"
+                    Click="btnGoBack"
            Name="btnAdminMode"
-                    Visibility="Hidden"
+                    Visibility="Visible"
         BorderThickness="0">
             </Button>
         </Border>
 
         <Border Grid.Row="6"
-        Grid.Column="5"
+        Grid.Column="4"
         Margin="20"
         Background="MediumSlateBlue"
         CornerRadius="10">
@@ -187,13 +155,14 @@ Grid.RowSpan="4"
 Name="lstTravels">
                 <ListView.View>
                     <GridView>
-                        
-                        <GridViewColumn Width="200" Header="Depart to Destination" DisplayMemberBinding="{Binding Destination}"/>
 
-                        <GridViewColumn Width="100" Header="Travel days" DisplayMemberBinding="{Binding TravelDays}"/>
-                        <GridViewColumn Width="75" Header="Start date" DisplayMemberBinding="{Binding StartDate}"/>
-                        <GridViewColumn Width="75" Header="End date" DisplayMemberBinding="{Binding EndDate}"/>
-
+                        <GridViewColumn Width="150" Header="Depart to Destination" DisplayMemberBinding="{Binding Destination}"/>
+                        <GridViewColumn Width="75" Header="Travellers" DisplayMemberBinding="{Binding Travelers}"/>
+                        <GridViewColumn Width="100" Header="European Country" DisplayMemberBinding="{Binding EuropeanCountry}"/>
+                        <GridViewColumn Width="100" Header="Countries" DisplayMemberBinding="{Binding Countries}"/>
+                        <GridViewColumn Width="100" Header="Start date" DisplayMemberBinding="{Binding StartDate}"/>
+                        <GridViewColumn Width="100" Header="End date" DisplayMemberBinding="{Binding EndDate}"/>
+                        <GridViewColumn Width="100" Header="Username" DisplayMemberBinding="{Binding Username}"/>
 
                     </GridView>
                 </ListView.View>

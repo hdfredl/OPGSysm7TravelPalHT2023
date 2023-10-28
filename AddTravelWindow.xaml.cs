@@ -33,7 +33,6 @@ public partial class AddTravelWindow : Window
 
     }
 
-
     private void CategoryBox()
     {
         //cbCategory.Items.Add(new ComboBoxItem { Content = "Trip Category" }); //{ Content = "Trip Category" }
@@ -91,16 +90,6 @@ public partial class AddTravelWindow : Window
         UpdateCountryComboBox(EuropeanCountry.Sweden); // Ocheckad är EU länderna.
     }
 
-    private void btnAddToPacklist(object sender, RoutedEventArgs e)
-    {
-        // AVVAKTA
-    }
-
-    private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
-    {
-        // AVVAKTA
-    }
-
     private void btnSaveNAdd(object sender, RoutedEventArgs e)
     {
         try
@@ -115,7 +104,7 @@ public partial class AddTravelWindow : Window
 
                 WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
 
-                object selectedCountry = cbEUorCountries.SelectedItem;
+                object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor
                 Countries countries = 0;
                 EuropeanCountry europeanCountry = 0;
 
@@ -131,12 +120,10 @@ public partial class AddTravelWindow : Window
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
                 DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
 
-
                 if (int.TryParse(txtTravelers.Text, out travellers))
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
-                        // Create the Travel object with AllInclusive and MeetingDetails
                         Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
                         //{
                         //    AllInclusive = checkBoxAllInclusive.IsChecked ?? false,
@@ -194,7 +181,6 @@ public partial class AddTravelWindow : Window
     private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         ComboBoxItem selectedItem = (ComboBoxItem)cbCategory.SelectedItem;
-        //string selectedCategory = (string)cbCategory.SelectedItem;
 
         if (selectedItem.Content.ToString() == "WorkTrip")
         {
@@ -224,8 +210,15 @@ public partial class AddTravelWindow : Window
 
             borderMeetingDetails.Visibility = Visibility.Collapsed;
         }
+    }
+    private void btnAddToPacklist(object sender, RoutedEventArgs e)
+    {
+        // AVVAKTA
+    }
 
-
+    private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
+    {
+        // AVVAKTA
     }
 }
 

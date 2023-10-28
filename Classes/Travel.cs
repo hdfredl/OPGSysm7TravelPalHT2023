@@ -7,30 +7,15 @@ namespace OPGSysm7TravelPalHT2023.Classes;
 public class Travel
 {
     public string? Destination { get; set; }
-
     public Countries Countries { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
-    //public string Info { get; set; }
-    //public List<PackingListItem> PackingList { get; set; }
     public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; } // Ändra sen..
+    public DateTime EndDate { get; set; }
     public WorkOrVacation WorkOrVacation { get; set; }
     public int TravelDays { get; set; }
     public bool AllInclusive { get; set; }
     public string MeetingDetails { get; set; }
-
-    //public class PackingListItem // Gör om sen kanske.... gjordes nu snabbt för att släcka errors.
-    //{
-    //    public string? Itemsname { get; set; }
-    //    public int Quantity { get; set; }
-    //    public PackingListItem(string itemsname, int quantity)
-    //    {
-    //        Itemsname = itemsname;
-    //        Quantity = quantity;
-    //    }
-
-    //}
 
     public Travel(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
     {
@@ -38,13 +23,10 @@ public class Travel
         Countries = country;
         EuropeanCountry = europeanCountry;
         Travelers = travellers;
-        //Info = getInfo;
         WorkOrVacation = workorvacation;
-        //PackingList = packingList;
         StartDate = startDate;
         EndDate = endDate;
         TravelDays = CalculateTravelDays();
-
     }
     public virtual string GetInfo()
     {
@@ -99,3 +81,22 @@ public class Travel
         }
     }
 }
+
+
+
+
+
+//public List<PackingListItem> PackingList { get; set; }
+
+
+//public class PackingListItem // Gör om sen kanske.... gjordes nu snabbt för att släcka errors.
+//{
+//    public string? Itemsname { get; set; }
+//    public int Quantity { get; set; }
+//    public PackingListItem(string itemsname, int quantity)
+//    {
+//        Itemsname = itemsname;
+//        Quantity = quantity;
+//    }
+
+//}

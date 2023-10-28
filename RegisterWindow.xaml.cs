@@ -9,9 +9,6 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class RegisterWindow : Window
 {
-
-
-
     //private EuropeanCountry european;
     //private Countries countries2;
     public RegisterWindow() // List<IUser> users
