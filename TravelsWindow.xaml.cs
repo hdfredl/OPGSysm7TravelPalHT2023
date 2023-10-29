@@ -16,12 +16,19 @@ public partial class TravelsWindow : Window
         if (UserManager.signInUser != null)
         {
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
-        }
 
-        if (UserManager.signInUser != null) // Skapat en enum till för att aktivera admin only knappen
-        {
-            UserManager.AuthenticateAdmin("admin", "password");
-            btnAdminMode.Visibility = Visibility.Visible;
+
+            if (UserManager.signInUser.Username == "admin")
+            {
+                // Show the admin button for the user with the "admin" username.
+                btnAdminMode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Hide the admin button for non-admin users.
+                btnAdminMode.Visibility = Visibility.Hidden;
+            }
+
         }
 
         //if (UserManager.signInUser != null)
