@@ -9,10 +9,11 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class TravelDetailsWindow : Window
 {
     private Travel selectedTrip;
+
     public TravelDetailsWindow(Travel travel)
     {
         InitializeComponent();
-
+        //this.travello = traveloo;
         this.selectedTrip = travel;
 
         if (UserManager.signInUser != null)
@@ -27,6 +28,31 @@ public partial class TravelDetailsWindow : Window
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
+        //txtMeetingDetails.Text = selectedTrip.GetInfo();
+
+
+
+        if (selectedTrip is Travel workTrip)
+        {
+
+            txtMeetingDetails.Text = workTrip.MeetingDetails; // YEES ÄNTLIGEN.. GetInfo Override hänger på
+
+        }
+
+        if (selectedTrip is Travel allinclusive)
+        {
+            lblAllInclusive.Visibility = Visibility.Visible;
+
+            if (allinclusive.AllInclusive == true)
+            {
+                lblAllInclusive.Content = "All Inclusive";
+            }
+            else
+            {
+                lblAllInclusive.Content = "Not all inclusive";
+            }
+        }
+
     }
 
     private void btnGoBack(object sender, RoutedEventArgs e)

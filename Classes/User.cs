@@ -7,10 +7,10 @@ public class User : IUser
 {
     public string Username { get; set; }
     public string Password { get; set; }
-    //public AdminRole adminRole { get; set; }
+
     public Countries CountriesWorldWide { get; set; }
     public List<Travel> Destinations { get; set; }
-    //public int Travelers { get; set; }
+
     public EuropeanCountry EuropeanCountry { get; set; }
     public User()
     {
@@ -22,11 +22,10 @@ public class Admin : IUser
 {
     public string Username { get; set; }
     public string Password { get; set; }
-    // public AdminRole adminRole { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public Countries CountriesWorldWide { get; set; }
     public List<Travel> Destinations { get; set; }
-    //public int Travelers { get; set; }
+
     public Admin()
     {
         Destinations = new List<Travel>();

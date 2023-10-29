@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
 
 namespace OPGSysm7TravelPalHT2023;
@@ -25,10 +24,10 @@ public partial class TravelsWindow : Window
             btnAdminMode.Visibility = Visibility.Visible;
         }
 
-        if (UserManager.signInUser != null)
-        {
-            lstTravels.ItemsSource = TravelManager.Travels;
-        }
+        //if (UserManager.signInUser != null)
+        //{
+        //    lstTravels.ItemsSource = TravelManager.Travels;
+        //}
 
         UpdateUI();
 
@@ -36,21 +35,23 @@ public partial class TravelsWindow : Window
 
     private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
     {
+        //ListViewItem? selectedItem = lstTravels.SelectedItem as ListViewItem;
         try
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
             //ListViewItem? deleteTravel = lstTravels.SelectedItem as ListViewItem;
             if (selectedItem != null)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this travel?", "Confirmation", MessageBoxButton.YesNo);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    /* Travel removeTravel = (Travel)selectedItem.Tag;*/ // Se över denna med ALBIN
-                    TravelManager.RemoveTravel(selectedItem); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
-                                                              //lstTravels.Items.Remove(deleteTravel);
-                }
+                //Travel? deleteTravel = selectedItem.Tag as Travel;
+                TravelManager.RemoveTravel(selectedItem);
+                UpdateUI();
             }
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    /* Travel removeTravel = (Travel)selectedItem.Tag;*/ // Se över denna med ALBIN
+            //    TravelManager.RemoveTravel(selectedItem); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
+            //                                              //lstTravels.Items.Remove(deleteTravel);
+            //}
             else
             {
                 MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
@@ -73,12 +74,13 @@ public partial class TravelsWindow : Window
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
     {
         // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
+        //ListViewItem selectedItem = lstTravels.SelectedItem as ListViewItem;
 
         if (lstTravels.SelectedItem != null)
         {
-            Travel? selectedTravel = lstTravels.SelectedItem as Travel;
-
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
+            //Travel? selectedTravel = selectedItem.Tag as Travel;
+            Travel? selectedItem = lstTravels.SelectedItem as Travel;
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem);
             travelDetailsWindow.Show();
             Close();
         }
@@ -104,13 +106,13 @@ public partial class TravelsWindow : Window
 
     private void UpdateUI()
     {
-        //lstTravels.Items.Clear();
+        lstTravels.Items.Clear();
         foreach (Travel travel in TravelManager.Travels)
         {
-            ListViewItem item = new ListViewItem();
-            item.Content = travel.Destination;
-            item.Tag = travel;
-            /*lstTravels.Items.Add(item);*/ //< -Kraschar programmet när man kör den.
+            //ListViewItem item = new ListViewItem();
+            //item.Content = travel.GetInfo(); // .Destinations
+            //item.Tag = travel;
+            lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
         }
     }
 

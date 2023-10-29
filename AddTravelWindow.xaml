@@ -206,7 +206,7 @@ Foreground="MediumSlateBlue"
             Content="All inclusive"
              Margin="10"
             Visibility="Collapsed"
-            Name="checkBoxAllInclusive"
+            Name="checkBoxAllInclusive" Checked="checkBoxAllInclusive_Checked"
             />
 
 
@@ -217,7 +217,7 @@ Foreground="MediumSlateBlue"
             Visibility="Collapsed"
             Margin="10"
             VerticalAlignment="Center"
-    Name="checkBoxMeetingDetails"
+    Name="checkBoxMeetingDetails" Checked="checkBoxMeetingDetails_Checked"
     />
         <CheckBox 
 Grid.Column="3"
@@ -367,7 +367,7 @@ Foreground="MediumSlateBlue"
                      Grid.RowSpan="2"
                  Name="txtMeetingDetails"
                      Visibility="Visible"
-         Width="100">
+         Width="100" TextChanged="txtMeetingDetails_TextChanged">
 
                 <!-- TextBox content and properties -->
             </TextBox>

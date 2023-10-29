@@ -126,7 +126,7 @@ public partial class AddTravelWindow : Window
                     {
                         Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
                         //{
-                        //    AllInclusive = checkBoxAllInclusive.IsChecked ?? false,
+                        //    AllInclusive = checkBoxAllInclusive.IsChecked ?? false
 
                         //};
 
@@ -136,6 +136,13 @@ public partial class AddTravelWindow : Window
                         newTravel.WorkOrVacation = workorvacation;
                         newTravel.StartDate = startDate;
                         newTravel.EndDate = endDate;
+
+                        bool isAllInclusive = false;
+                        if (checkBoxAllInclusive.IsChecked == true)
+                        {
+                            isAllInclusive = true;
+                        }
+                        newTravel.AllInclusive = isAllInclusive;
 
                         TravelManager.Travels.Add(newTravel);
                         keepAdding = false;
@@ -211,6 +218,17 @@ public partial class AddTravelWindow : Window
             borderMeetingDetails.Visibility = Visibility.Collapsed;
         }
     }
+
+    private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (txtMeetingDetails.Text != null)
+        {
+
+
+        }
+
+    }
+
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
     {
         // AVVAKTA
@@ -219,6 +237,16 @@ public partial class AddTravelWindow : Window
     private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
     {
         // AVVAKTA
+    }
+
+    private void checkBoxAllInclusive_Checked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void checkBoxMeetingDetails_Checked(object sender, RoutedEventArgs e)
+    {
+
     }
 }
 
