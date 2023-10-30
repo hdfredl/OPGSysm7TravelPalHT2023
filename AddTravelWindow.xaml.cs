@@ -11,10 +11,12 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class AddTravelWindow : Window
 {
-
-    public AddTravelWindow()
+    private User user;
+    public AddTravelWindow(User user)
     {
         InitializeComponent();
+
+        this.user = user;
 
         if (UserManager.signInUser != null)
         {
@@ -105,7 +107,7 @@ public partial class AddTravelWindow : Window
                 WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
 
                 object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor
-                Countries countries = 0; // Denna gör så att India väljs hela tiden..
+                Countries countries = user.SelectedCountry; // Denna gör så att India väljs hela tiden.. KANSKE TA BORT DENNA FRÅN DENNA?..
                 EuropeanCountry europeanCountry = 0; // Här kan vi välja över med en ny resa.. " Depart to.. "
 
                 if (selectedCountry is EuropeanCountry)
@@ -124,7 +126,7 @@ public partial class AddTravelWindow : Window
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
-                        Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
+                        Travel newTravel = new Travel(destination, user.SelectedCountry, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate); // countries,
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;

@@ -47,7 +47,7 @@ public partial class RegisterWindow : Window
             }
             else if (cbCitizenOfBothEnumLists.SelectedItem is Countries selectedCountry)
             {
-                UserManager.AddUser(new User() { Username = username, Password = password, Countries = selectedCountry });
+                UserManager.AddUser(new User() { Username = username, Password = password, SelectedCountry = selectedCountry });
 
                 MessageBox.Show("Registration successful. You can now log in.");
 

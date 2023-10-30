@@ -9,6 +9,7 @@ public class User : IUser
     public string Password { get; set; }
     public Countries Countries { get; set; } // CountriesWorldWide... får se vad som händer nu
     public EuropeanCountry EuropeanCountry { get; set; }
+    public Countries SelectedCountry { get; set; }
     public List<Travel> Destinations { get; set; }
 
     public User()

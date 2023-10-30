@@ -86,7 +86,7 @@ public partial class TravelsWindow : Window
         }
         else
         {
-            AddTravelWindow addTravelWindow = new AddTravelWindow();
+            AddTravelWindow addTravelWindow = new AddTravelWindow((User)UserManager.signInUser); // lämna userns parameterar så den följer med när man ska skapa en ny travel.
             addTravelWindow.Show();
             Close();
         }

@@ -8,7 +8,7 @@ public class Travel
 {
     public string? Destination { get; set; }
     public Countries Countries { get; set; }
-    //public Countries CountriesWorldWide { get; set; }
+    public Countries SelectedCountry { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
     public DateTime StartDate { get; set; }
@@ -21,7 +21,7 @@ public class Travel
     public Travel(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
     {
         Destination = destination;
-        Countries = country;
+        SelectedCountry = country;
         EuropeanCountry = europeanCountry;
         Travelers = travellers;
         WorkOrVacation = workorvacation;

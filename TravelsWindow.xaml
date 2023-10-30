@@ -190,7 +190,7 @@ Name="lstTravels">
                         
                         <GridViewColumn Width="130" Header="Depart to Destination" DisplayMemberBinding="{Binding Destination}"/>
                         <GridViewColumn Width="130" Header="Depart to Country" DisplayMemberBinding="{Binding EuropeanCountry}"/>
-                        <GridViewColumn Width="125" Header="Citizen of" DisplayMemberBinding="{Binding Countries}"/>
+                        <GridViewColumn Width="125" Header="Citizen of" DisplayMemberBinding="{Binding SelectedCountry}"/>
                         <GridViewColumn Width="100" Header="Travel days" DisplayMemberBinding="{Binding TravelDays}"/>
                         <GridViewColumn Width="75" Header="Start date" DisplayMemberBinding="{Binding StartDate}"/>
                         <GridViewColumn Width="75" Header="End date" DisplayMemberBinding="{Binding EndDate}"/>
