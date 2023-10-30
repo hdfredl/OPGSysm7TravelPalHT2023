@@ -23,7 +23,7 @@ public partial class TravelDetailsWindow : Window
 
         txtCategory.Text = selectedTrip.WorkOrVacation.ToString();
         txtDestination.Text = selectedTrip.Destination;
-        txtCountry.Text = selectedTrip.Countries.ToString();
+        txtCountry.Text = selectedTrip.EuropeanCountry.ToString();
         txtTravelers.Text = selectedTrip.Travelers.ToString();
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();

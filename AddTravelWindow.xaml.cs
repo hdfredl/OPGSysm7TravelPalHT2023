@@ -105,8 +105,8 @@ public partial class AddTravelWindow : Window
                 WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
 
                 object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor
-                Countries countries = 0;
-                EuropeanCountry europeanCountry = 0;
+                Countries countries = 0; // Denna gör så att India väljs hela tiden..
+                EuropeanCountry europeanCountry = 0; // Här kan vi välja över med en ny resa.. " Depart to.. "
 
                 if (selectedCountry is EuropeanCountry)
                 {

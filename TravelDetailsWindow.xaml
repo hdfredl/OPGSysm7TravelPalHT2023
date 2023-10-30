@@ -164,7 +164,7 @@
         <Label
 Grid.Column="1"
 Grid.Row="4"
-Content="Country"
+Content="Departing to"
 VerticalAlignment="Center"
 HorizontalAlignment="Center"
 FontFamily="Arial"

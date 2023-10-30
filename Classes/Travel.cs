@@ -8,6 +8,7 @@ public class Travel
 {
     public string? Destination { get; set; }
     public Countries Countries { get; set; }
+    //public Countries CountriesWorldWide { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public int Travelers { get; set; }
     public DateTime StartDate { get; set; }
@@ -30,8 +31,8 @@ public class Travel
     }
     public virtual string GetInfo()
     {
-        return $"Destination: {Destination}, Country: {Countries},European Countries: {EuropeanCountry} , Travelers: {Travelers}, Start Date: {StartDate}, End Date: {EndDate}, Travel Days: {TravelDays}";
-    }
+        return $"Destination: {Destination} ,European Countries: {EuropeanCountry}, Citizen of: {Countries} , Travelers: {Travelers}, Start Date: {StartDate}, End Date: {EndDate}, Travel Days: {TravelDays}";
+    } // , Country: {Countries} Lägger denna här tillfälligt. Letar efter bugg för land som ska displayas i traveldetails window.
     private int CalculateTravelDays()
     {
         TimeSpan travellingdays = EndDate - StartDate;

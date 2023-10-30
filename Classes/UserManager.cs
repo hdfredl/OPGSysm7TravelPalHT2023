@@ -17,22 +17,22 @@ public static class UserManager
         {
             Username = "admin",
             Password = "adminpassword",
-            CountriesWorldWide = Countries.United_States
+            Countries = Countries.United_States
         }); // Hårdkodad Admin.
 
         User newUser = new User
         {
             Username = "user",
             Password = "password",
-            CountriesWorldWide = Countries.United_States,
+            Countries = Countries.United_States,
             EuropeanCountry = EuropeanCountry.Sweden,
         };
 
         //  Skapar en hårdkodad lista för hårdkodad "user"
         newUser.Destinations = new List<Travel>
         {
-            new Travel("Washington", Countries.United_States, EuropeanCountry.Sweden, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
-            new Travel("Nice", Countries.France, EuropeanCountry.France, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
+            new Travel("Barcelona", Countries.United_States, EuropeanCountry.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
+            new Travel("Berlin", Countries.France, EuropeanCountry.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
         };
 
         foreach (Travel travel in newUser.Destinations)

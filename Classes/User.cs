@@ -7,7 +7,7 @@ public class User : IUser
 {
     public string Username { get; set; }
     public string Password { get; set; }
-    public Countries CountriesWorldWide { get; set; }
+    public Countries Countries { get; set; } // CountriesWorldWide... får se vad som händer nu
     public EuropeanCountry EuropeanCountry { get; set; }
     public List<Travel> Destinations { get; set; }
 
@@ -21,7 +21,7 @@ public class Admin : IUser
 {
     public string Username { get; set; }
     public string Password { get; set; }
-    public Countries CountriesWorldWide { get; set; }
+    public Countries Countries { get; set; }
     public EuropeanCountry EuropeanCountry { get; set; }
     public List<Travel> Destinations { get; set; }
 
