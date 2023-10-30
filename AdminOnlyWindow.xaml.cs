@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
 
 namespace OPGSysm7TravelPalHT2023;
@@ -22,22 +22,17 @@ public partial class AdminOnlyWindow : Window
 
         List<object> userList = new List<object>(); // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
 
-        foreach (IUser user in UserManager.Users) // lägger till användarens namn
-        {
-            userList.Add(user);
-            foreach (Travel travel in user.Destinations) // lägger till användarens destinations
-            {
+        //foreach (IUser user in UserManager.Users) // Avvakta med denna för delete av user.
+        //{
+        //    userList.Add(user);
+        //}
 
-                userList.Add(travel);
-            }
-        }
-        foreach (Travel travel in TravelManager.Travels) // lägger till Travels lista
+        foreach (Travel travel in TravelManager.Travels)
         {
             userList.Add(travel);
         }
 
-
-        lstTravels.ItemsSource = userList; // adderar bägge till listview.
+        lstTravels.ItemsSource = userList;// adderar bägge till listview.
     }
 
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
@@ -45,7 +40,6 @@ public partial class AdminOnlyWindow : Window
 
         if (lstTravels.SelectedItem != null)
         {
-            //ListViewItem selectedTravel = lstTravels.SelectedItem as ListViewItem;
             Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
             TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
@@ -57,35 +51,88 @@ public partial class AdminOnlyWindow : Window
             MessageBox.Show("Select a travel to view details.", "Warning", MessageBoxButton.OK);
         }
     }
+    private void btnRemove(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (lstTravels.SelectedItem != null) // listan är selected.
+            {
+                if (lstTravels.SelectedItem is IUser selectedUser)
+                {
+                    UserManager.RemoveUser(selectedUser);
+
+                }
+                else if (lstTravels.SelectedItem is Travel selectedTravel)
+                {
+                    TravelManager.RemoveTravel(selectedTravel);
+                }
+
+                UpdateUI();
+            }
+            else
+            {
+                MessageBox.Show("Select a user or travel to remove.", "Warning", MessageBoxButton.OK);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        // TODO: Updatera listan så traveln försvinner
+    }
 
     private void btnSignOut(object sender, RoutedEventArgs e)
     {
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        Close();
 
     }
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-
+        TravelsWindow travelsWindow = new TravelsWindow();
+        travelsWindow.Show();
+        Close();
     }
 
-    private void btnRemove(object sender, RoutedEventArgs e)
+    private void UpdateUI()
     {
-        ListViewItem? selectedListViewItem = lstTravels.SelectedItem as ListViewItem;
+        lstTravels.ItemsSource = null; // Clear datan 
+        List<object> userList = new List<object>();
 
-        if (selectedListViewItem != null)
+        foreach (IUser user in UserManager.Users)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this trip?", "Confirmation", MessageBoxButton.YesNo);
+            userList.Add(user);
+        }
 
-            if (result == MessageBoxResult.Yes)
-            {
-                Travel? selectedTravel = selectedListViewItem.Content as Travel;
-                TravelManager.RemoveTravel(selectedTravel);
-                //UpdateUI();
-            }
-        }
-        else
+        foreach (Travel travel in TravelManager.Travels)
         {
-            MessageBox.Show("Select a travel to delete.", "Warning", MessageBoxButton.OK);
+            userList.Add(travel);
         }
+
+        lstTravels.ItemsSource = userList;
     }
 }
+
+
+//private void UpdatingAllUI()
+//{
+//    List<object> userList = new List<object>(); // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
+//    lstTravels.Items.Clear();
+//    foreach (IUser user in UserManager.Users) // lägger till användarens namn
+//    {
+//        userList.Add(user);
+
+//        foreach (Travel travel in user.Destinations) // lägger till användarens destinations
+//        {
+//            userList.Add(travel);
+
+//        }
+//    }
+//    foreach (Travel travel in TravelManager.Travels) // lägger till Travels lista
+//    {
+//        userList.Add(travel);
+//    }
+//    lstTravels.ItemsSource = userList;
+//}

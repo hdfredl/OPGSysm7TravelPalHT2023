@@ -28,15 +28,11 @@ public partial class TravelDetailsWindow : Window
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
-        //txtMeetingDetails.Text = selectedTrip.GetInfo();
-
 
 
         if (selectedTrip is Travel workTrip)
         {
-
             txtMeetingDetails.Text = workTrip.MeetingDetails; // YEES ÄNTLIGEN.. GetInfo Override hänger på
-
         }
 
         if (selectedTrip is Travel allinclusive)
@@ -52,7 +48,6 @@ public partial class TravelDetailsWindow : Window
                 lblAllInclusive.Content = "Not all inclusive";
             }
         }
-
     }
 
     private void btnGoBack(object sender, RoutedEventArgs e)

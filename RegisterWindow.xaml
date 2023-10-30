@@ -206,7 +206,18 @@ CornerRadius="10">
             ItemsSource="{Binding enumItems}"
             Name="cbCitizenOfBothEnumLists" SelectionChanged="cbCitizenOfBothEnumLists_SelectionChanged"
             />
-        
+        <Label 
+      Grid.Row="6"
+      Grid.Column="3"
+      Content="Missing information"
+      Name="lblNoContent"
+      Background="Transparent"
+      Foreground="Red"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center"
+      FontFamily="Arial"
+      Visibility="Hidden"
+      />
 
 
     </Grid>

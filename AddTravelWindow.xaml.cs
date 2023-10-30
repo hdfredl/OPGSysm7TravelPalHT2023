@@ -125,10 +125,6 @@ public partial class AddTravelWindow : Window
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
                         Travel newTravel = new Travel(destination, countries, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate);
-                        //{
-                        //    AllInclusive = checkBoxAllInclusive.IsChecked ?? false
-
-                        //};
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;
@@ -221,11 +217,6 @@ public partial class AddTravelWindow : Window
 
     private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (txtMeetingDetails.Text != null)
-        {
-
-
-        }
 
     }
 

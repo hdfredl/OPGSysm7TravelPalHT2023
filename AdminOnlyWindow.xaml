@@ -151,12 +151,11 @@
 Grid.Row="2"
 Grid.ColumnSpan="5"
 Grid.RowSpan="4"
-            DisplayMemberPath="Destination" 
 Name="lstTravels">
                 <ListView.View>
                     <GridView>
 
-                        <GridViewColumn Width="150" Header="Depart to Destination" DisplayMemberBinding="{Binding Destination}"/>
+                        <GridViewColumn Width="150" Header="Destination" DisplayMemberBinding="{Binding Destination}"/>
                         <GridViewColumn Width="75" Header="Travellers" DisplayMemberBinding="{Binding Travelers}"/>
                         <GridViewColumn Width="100" Header="European Country" DisplayMemberBinding="{Binding EuropeanCountry}"/>
                         <GridViewColumn Width="100" Header="Countries" DisplayMemberBinding="{Binding Countries}"/>
