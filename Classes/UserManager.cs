@@ -12,7 +12,6 @@ public static class UserManager
 
     static UserManager()
     {
-
         Users.Add(new Admin
         {
             Username = "admin",
@@ -24,15 +23,15 @@ public static class UserManager
         {
             Username = "user",
             Password = "password",
-            Countries = Countries.United_States,
-            EuropeanCountry = EuropeanCountry.Sweden,
+            SelectedCountry = Countries.United_States,
+            Countries = Countries.Sweden,
         };
 
         //  Skapar en hårdkodad lista för hårdkodad "user"
         newUser.Destinations = new List<Travel>
         {
-            new Travel("Barcelona", Countries.United_States, EuropeanCountry.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
-            new Travel("Berlin", Countries.France, EuropeanCountry.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
+            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
+            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
         };
 
         foreach (Travel travel in newUser.Destinations)

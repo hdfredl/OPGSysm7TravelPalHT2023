@@ -27,12 +27,7 @@ public partial class AddTravelWindow : Window
 
         CountryBox();
 
-        UpdateCountryComboBox(EuropeanCountry.Sweden);
-
-        //  Lägger in check eller unchecked event för Chheckbox
-        checkBoxNonEUCountries.Checked += checkBoxNonEUCountries_Checked;
-        checkBoxNonEUCountries.Unchecked += unCheckBoxNonEUCountries_Checked;
-
+        UpdateCountryComboBox(Countries.Sweden);
     }
 
     private void CategoryBox()
@@ -51,7 +46,7 @@ public partial class AddTravelWindow : Window
     private void CountryBox()
     {
         cbEUorCountries.Items.Add(new ComboBoxItem { Content = "Country" }); // cbEUorCountries.Items.Add("Country");
-        foreach (EuropeanCountry countries in Enum.GetValues(typeof(EuropeanCountry)))
+        foreach (Countries countries in Enum.GetValues(typeof(Countries)))
         {
             ComboBoxItem item = new();
             item.Content = countries.ToString();
@@ -65,15 +60,7 @@ public partial class AddTravelWindow : Window
     {
         cbEUorCountries.Items.Clear();
 
-        //  Lägger till Enum( länder) beroende på vilken lista man väljer
-        if (selectedCountry.GetType() == typeof(EuropeanCountry))
-        {
-            foreach (var country in Enum.GetValues(typeof(EuropeanCountry))) // Laddar in ny enum lista i combobox
-            {
-                cbEUorCountries.Items.Add(country);
-            }
-        }
-        else if (selectedCountry.GetType() == typeof(Countries))
+        if (selectedCountry.GetType() == typeof(Countries))
         {
             foreach (var country in Enum.GetValues(typeof(Countries)))
             {
@@ -83,14 +70,6 @@ public partial class AddTravelWindow : Window
     }
 
 
-    private void checkBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
-    {
-        UpdateCountryComboBox(Countries.United_States); // om checkad så öppnas Countries enum lista.
-    }
-    private void unCheckBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
-    {
-        UpdateCountryComboBox(EuropeanCountry.Sweden); // Ocheckad är EU länderna.
-    }
 
     private void btnSaveNAdd(object sender, RoutedEventArgs e)
     {
@@ -106,17 +85,13 @@ public partial class AddTravelWindow : Window
 
                 WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
 
-                object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor
-                Countries countries = user.SelectedCountry; // Denna gör så att India väljs hela tiden.. KANSKE TA BORT DENNA FRÅN DENNA?..
-                EuropeanCountry europeanCountry = 0; // Här kan vi välja över med en ny resa.. " Depart to.. "
+                object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor som EU counry o Countries.
+                Countries countries = user.SelectedCountry; // kommer med från selectedCountry - Register
+                Countries country = 0; // Här kan vi välja över med en ny resa.. " Depart to.. "
 
-                if (selectedCountry is EuropeanCountry)
+                if (selectedCountry is Countries)
                 {
-                    europeanCountry = (EuropeanCountry)selectedCountry;
-                }
-                else if (selectedCountry is Countries)
-                {
-                    countries = (Countries)selectedCountry;
+                    country = (Countries)selectedCountry;
                 }
 
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
@@ -126,7 +101,7 @@ public partial class AddTravelWindow : Window
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
-                        Travel newTravel = new Travel(destination, user.SelectedCountry, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate); // countries,
+                        Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate); // user.SelectedCountry hänger på från register,Main,TravelWindow.
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;
@@ -190,7 +165,6 @@ public partial class AddTravelWindow : Window
         if (selectedItem.Content.ToString() == "WorkTrip")
         {
             // Gör vissa detaljer synliga och andra ej beroende vad man checkar
-            checkBoxMeetingDetails.Visibility = Visibility.Visible;
 
             checkBoxAllInclusive.Visibility = Visibility.Collapsed;
 
@@ -206,8 +180,6 @@ public partial class AddTravelWindow : Window
             checkBoxAllInclusive.Visibility = Visibility.Visible;
 
             txtMeetingDetails.Visibility = Visibility.Collapsed;
-
-            checkBoxMeetingDetails.Visibility = Visibility.Collapsed;
 
             txtBoxMeetingDetails.Visibility = Visibility.Collapsed;
 
@@ -241,5 +213,12 @@ public partial class AddTravelWindow : Window
     {
 
     }
-}
+    private void checkBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
+    {
 
+    }
+    private void unCheckBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
+    {
+
+    }
+}

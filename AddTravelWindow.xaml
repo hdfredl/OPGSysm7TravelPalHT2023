@@ -210,7 +210,7 @@ Foreground="MediumSlateBlue"
             />
 
 
-        <CheckBox 
+        <!--<CheckBox 
     Grid.Column="3"
     Grid.Row="3"
     Content="Meetin Details"
@@ -228,7 +228,7 @@ Content="Non EU countries"
         VerticalAlignment="Center"
         Checked="checkBoxNonEUCountries_Checked"     
             Unchecked="unCheckBoxNonEUCountries_Checked"
-/>
+/>-->
 
 
 

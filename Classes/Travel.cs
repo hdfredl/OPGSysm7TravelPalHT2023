@@ -18,11 +18,12 @@ public class Travel
     public bool AllInclusive { get; set; }
     public string MeetingDetails { get; set; }
 
-    public Travel(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
+    public Travel(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
     {
         Destination = destination;
         SelectedCountry = country;
-        EuropeanCountry = europeanCountry;
+        //EuropeanCountry = europeanCountry;
+        Countries = countries;
         Travelers = travellers;
         WorkOrVacation = workorvacation;
         StartDate = startDate;
@@ -31,8 +32,8 @@ public class Travel
     }
     public virtual string GetInfo()
     {
-        return $"Destination: {Destination} ,European Countries: {EuropeanCountry}, Citizen of: {Countries} , Travelers: {Travelers}, Start Date: {StartDate}, End Date: {EndDate}, Travel Days: {TravelDays}";
-    } // , Country: {Countries} Lägger denna här tillfälligt. Letar efter bugg för land som ska displayas i traveldetails window.
+        return $"Destination: {Destination} ,Travelling to: {Countries}, Citizen of: {SelectedCountry} , Travelers: {Travelers}, Start Date: {StartDate}, End Date: {EndDate}, Travel Days: {TravelDays}";
+    }
     private int CalculateTravelDays()
     {
         TimeSpan travellingdays = EndDate - StartDate;
@@ -43,8 +44,8 @@ public class Travel
     {
         public string MeetingDetails { get; set; }  // string MeetingDetails
 
-        public WorkTrip(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails)
-            : base(destination, country, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate) // packingList,
+        public WorkTrip(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate) // packingList,
         {
             MeetingDetails = meetingDetails;
         }
@@ -62,8 +63,8 @@ public class Travel
     {
         public bool AllInclusive { get; set; } // bool AllInclusive
 
-        public Vacation(string destination, Countries country, EuropeanCountry europeanCountry, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive)
-            : base(destination, country, europeanCountry, workorvacation, travellers, getInfo, startDate, endDate) //packingList,
+        public Vacation(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate) //packingList,
         {
             AllInclusive = allInclusive;
         }

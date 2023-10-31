@@ -12,7 +12,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-
     }
 
     private void btnLogIn(object sender, RoutedEventArgs e)
@@ -42,8 +41,6 @@ public partial class MainWindow : Window
         registerWindow.Show();
         Close();
     }
-
-
 }
 
 // GAMMAL

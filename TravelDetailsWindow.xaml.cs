@@ -13,7 +13,7 @@ public partial class TravelDetailsWindow : Window
     public TravelDetailsWindow(Travel travel)
     {
         InitializeComponent();
-        //this.travello = traveloo;
+
         this.selectedTrip = travel;
 
         if (UserManager.signInUser != null)
@@ -23,15 +23,16 @@ public partial class TravelDetailsWindow : Window
 
         txtCategory.Text = selectedTrip.WorkOrVacation.ToString();
         txtDestination.Text = selectedTrip.Destination;
-        txtCountry.Text = selectedTrip.EuropeanCountry.ToString();
+        txtCountry.Text = selectedTrip.Countries.ToString();
         txtTravelers.Text = selectedTrip.Travelers.ToString();
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
 
-
         if (selectedTrip is Travel workTrip)
         {
+            lblAllInclusive.Visibility = Visibility.Hidden;
+
             txtMeetingDetails.Text = workTrip.MeetingDetails; // YEES ÄNTLIGEN.. GetInfo Override hänger på
         }
 
@@ -45,7 +46,7 @@ public partial class TravelDetailsWindow : Window
             }
             else
             {
-                lblAllInclusive.Content = "Not all inclusive";
+                lblAllInclusive.Content = "Not all inclusive / Work Trip";
             }
         }
     }

@@ -18,7 +18,6 @@ public static class TravelManager
     {
         Travels.Remove(travel);
     }
-
     public static void Reset()
     {
         Travels = new List<Travel>(); // Skapa ny lista för att tömma ListViewen

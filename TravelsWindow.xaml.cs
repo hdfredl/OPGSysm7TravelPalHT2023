@@ -17,11 +17,9 @@ public partial class TravelsWindow : Window
         {
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
 
-
             if (UserManager.signInUser.Username == "admin")
             {
                 btnAdminMode.Visibility = Visibility.Visible;
-
             }
             else
             {
@@ -42,18 +40,15 @@ public partial class TravelsWindow : Window
                 TravelManager.RemoveTravel(selectedItem);
                 UpdateUI();
             }
-
             else
             {
                 MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
             }
-
         }
         catch (NullReferenceException message)
         {
             MessageBox.Show(message.Message);
         }
-
     }
 
     private void btnHelpInfo(object sender, RoutedEventArgs e)
@@ -64,7 +59,6 @@ public partial class TravelsWindow : Window
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
     {
         // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
-
         if (lstTravels.SelectedItem != null)
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
@@ -104,9 +98,6 @@ public partial class TravelsWindow : Window
         lstTravels.Items.Clear();
         foreach (Travel travel in TravelManager.Travels)
         {
-            //ListViewItem item = new ListViewItem();
-            //item.Content = travel.GetInfo(); // .Destinations
-            //item.Tag = travel;
             lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
         }
     }
@@ -252,4 +243,17 @@ public partial class TravelsWindow : Window
 //        }
 //    }
 
+//}
+
+
+//private void UpdateUI()
+//{
+//    lstTravels.Items.Clear();
+//    foreach (Travel travel in TravelManager.Travels)
+//    {
+//        //ListViewItem item = new ListViewItem();
+//        //item.Content = travel.GetInfo(); // .Destinations
+//        //item.Tag = travel;
+//        lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
+//    }
 //}
