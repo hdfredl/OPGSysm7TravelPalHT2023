@@ -9,9 +9,11 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class TravelsWindow : Window
 {
-    public TravelsWindow()
+    private User user;
+    public TravelsWindow(User user)
     {
         InitializeComponent();
+        this.user = user;
 
         if (UserManager.signInUser != null)
         {
@@ -24,9 +26,10 @@ public partial class TravelsWindow : Window
             else
             {
                 btnAdminMode.Visibility = Visibility.Hidden;
-                UpdateUI();
+
             }
         }
+        UpdateUI();
     }
 
     private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
@@ -96,7 +99,7 @@ public partial class TravelsWindow : Window
     private void UpdateUI()
     {
         lstTravels.Items.Clear();
-        foreach (Travel travel in TravelManager.Travels)
+        foreach (Travel travel in user.Destinations) // static list är tom nu, bör ändras. 
         {
             lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
         }

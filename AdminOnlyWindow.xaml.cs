@@ -10,29 +10,33 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class AdminOnlyWindow : Window
 {
-
+    private Admin admin;
+    private User user;
     public AdminOnlyWindow()
     {
         InitializeComponent();
+        this.admin = admin;
+        this.user = user;
 
         if (UserManager.signInUser != null)
         {
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
         }
 
-        List<object> userList = new List<object>(); // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
+        /*  List<object> userList = new List<object>();*/ // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
 
         //foreach (IUser user in UserManager.Users) // Avvakta med denna för delete av user.
         //{
         //    userList.Add(user);
         //}
 
-        foreach (Travel travel in TravelManager.Travels)
-        {
-            userList.Add(travel);
-        }
+        //foreach (Travel travel in TravelManager.Travels)
+        //{
+        //    userList.Add(travel);
+        //}
 
-        lstTravels.ItemsSource = userList;// adderar bägge till listview.
+        UpdateUI();
+        /*lstTravels.ItemsSource = userList;*/// adderar bägge till listview.
     }
 
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
@@ -89,32 +93,51 @@ public partial class AdminOnlyWindow : Window
 
     }
 
-    private void btnGoBack(object sender, RoutedEventArgs e)
-    {
-        TravelsWindow travelsWindow = new TravelsWindow();
-        travelsWindow.Show();
-        Close();
-    }
+    //private void btnGoBack(object sender, RoutedEventArgs e)
+    //{
+    //    TravelsWindow travelsWindow = new TravelsWindow(this.user);
+    //    travelsWindow.Show();
+    //    Close();
+    //}
 
     private void UpdateUI()
     {
-        lstTravels.ItemsSource = null; // Clear datan 
-        List<object> userList = new List<object>();
+        lstTravels.ItemsSource = null; // Clear the data 
+        List<Travel> allUserTravels = new List<Travel>();
 
         foreach (IUser user in UserManager.Users)
         {
-            userList.Add(user);
+            if (user.Username != "admin")
+            {
+                foreach (Travel travel in user.Destinations)
+                {
+                    allUserTravels.Add(travel);
+                }
+            }
         }
 
-        foreach (Travel travel in TravelManager.Travels)
-        {
-            userList.Add(travel);
-        }
-
-        lstTravels.ItemsSource = userList;
+        lstTravels.ItemsSource = allUserTravels;
     }
 }
 
+
+//private void UpdateUI()
+//{
+//    lstTravels.ItemsSource = null; // Clear datan 
+//    List<object> userList = new List<object>();
+
+//    foreach (IUser user in UserManager.Users)
+//    {
+//        userList.Add(user);
+//    }
+
+//    foreach (Travel travel in user.Destinations)
+//    {
+//        userList.Add(travel);
+//    }
+
+//    lstTravels.ItemsSource = userList;
+//}
 
 //private void UpdatingAllUI()
 //{

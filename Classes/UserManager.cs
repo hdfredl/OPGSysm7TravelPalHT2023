@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023.Classes;
@@ -12,35 +11,13 @@ public static class UserManager
 
     static UserManager()
     {
+
         Users.Add(new Admin
         {
             Username = "admin",
             Password = "adminpassword",
             Countries = Countries.United_States
         }); // Hårdkodad Admin.
-
-        User newUser = new User
-        {
-            Username = "user",
-            Password = "password",
-            SelectedCountry = Countries.United_States,
-            Countries = Countries.Sweden,
-        };
-
-        //  Skapar en hårdkodad lista för hårdkodad "user"
-        newUser.Destinations = new List<Travel>
-        {
-            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
-            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
-        };
-
-        foreach (Travel travel in newUser.Destinations)
-        {
-            TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
-        }
-
-        //  Lägger till hårdkodad "user" till Users lista
-        UserManager.AddUser(newUser);
     }
 
     public static void AddUser(IUser user)
@@ -144,3 +121,27 @@ public static class UserManager
 ////// TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
 ////// LÄgger till ny user
 ////UserManager.AddUser(newUser);
+
+
+//User newUser = new User
+//{
+//    Username = "user",
+//    Password = "password",
+//    SelectedCountry = Countries.United_States,
+//    Countries = Countries.Sweden,
+//};
+
+////  Skapar en hårdkodad lista för hårdkodad "user"
+//newUser.Destinations = new List<Travel>
+//{
+//    new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
+//    new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
+//};
+
+//foreach (Travel travel in newUser.Destinations)
+//{
+//    TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
+//}
+
+////  Lägger till hårdkodad "user" till Users lista
+//UserManager.AddUser(newUser);

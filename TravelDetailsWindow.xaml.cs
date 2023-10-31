@@ -9,11 +9,12 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class TravelDetailsWindow : Window
 {
     private Travel selectedTrip;
+    private User user;
 
     public TravelDetailsWindow(Travel travel)
     {
         InitializeComponent();
-
+        this.user = user;
         this.selectedTrip = travel;
 
         if (UserManager.signInUser != null)
@@ -53,7 +54,7 @@ public partial class TravelDetailsWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        TravelsWindow travelsWindow = new TravelsWindow();
+        TravelsWindow travelsWindow = new TravelsWindow(user);
         travelsWindow.Show();
         Close();
     }

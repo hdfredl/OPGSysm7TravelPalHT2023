@@ -110,7 +110,7 @@
         BorderThickness="0"/>
         </Border>
 
-        <Border Grid.Row="1"
+        <!--<Border Grid.Row="1"
         Grid.Column="4"
         Margin="20"
         Background="MintCream"
@@ -123,7 +123,7 @@
                     Visibility="Visible"
         BorderThickness="0">
             </Button>
-        </Border>
+        </Border>-->
 
         <Border Grid.Row="6"
         Grid.Column="4"
@@ -157,8 +157,8 @@ Name="lstTravels">
 
                         <GridViewColumn Width="150" Header="Destination" DisplayMemberBinding="{Binding Destination}"/>
                         <GridViewColumn Width="75" Header="Travellers" DisplayMemberBinding="{Binding Travelers}"/>
-                        <GridViewColumn Width="100" Header="European Country" DisplayMemberBinding="{Binding EuropeanCountry}"/>
-                        <GridViewColumn Width="100" Header="Countries" DisplayMemberBinding="{Binding Countries}"/>
+                        <GridViewColumn Width="100" Header="Depart to" DisplayMemberBinding="{Binding Countries}"/>
+                        <GridViewColumn Width="100" Header="Countries" DisplayMemberBinding="{Binding SelectedCountry}"/>
                         <GridViewColumn Width="100" Header="Start date" DisplayMemberBinding="{Binding StartDate}"/>
                         <GridViewColumn Width="100" Header="End date" DisplayMemberBinding="{Binding EndDate}"/>
                         <GridViewColumn Width="100" Header="Username" DisplayMemberBinding="{Binding Username}"/>

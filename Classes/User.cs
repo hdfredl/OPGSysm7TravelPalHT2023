@@ -16,6 +16,8 @@ public class User : IUser
     {
         Destinations = new List<Travel>();
     }
+
+
 }
 
 public class Admin : IUser
@@ -31,6 +33,8 @@ public class Admin : IUser
         Destinations = new List<Travel>();
     }
 }
+
+
 
 
 

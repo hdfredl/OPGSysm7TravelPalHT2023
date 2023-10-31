@@ -24,9 +24,7 @@ public partial class AddTravelWindow : Window
         }
 
         CategoryBox();
-
         CountryBox();
-
         UpdateCountryComboBox(Countries.Sweden);
     }
 
@@ -68,9 +66,6 @@ public partial class AddTravelWindow : Window
             }
         }
     }
-
-
-
     private void btnSaveNAdd(object sender, RoutedEventArgs e)
     {
         try
@@ -117,10 +112,10 @@ public partial class AddTravelWindow : Window
                         }
                         newTravel.AllInclusive = isAllInclusive;
 
-                        TravelManager.Travels.Add(newTravel);
+                        user.Destinations.Add(newTravel);
                         keepAdding = false;
 
-                        TravelsWindow travelsWindow = new TravelsWindow();
+                        TravelsWindow travelsWindow = new TravelsWindow(user);
                         travelsWindow.Show();
                         Close();
                     }
@@ -146,7 +141,7 @@ public partial class AddTravelWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        TravelsWindow travelsWindow = new TravelsWindow();
+        TravelsWindow travelsWindow = new TravelsWindow(user);
         travelsWindow.Show();
         Close();
     }

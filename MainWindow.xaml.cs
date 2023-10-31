@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using OPGSysm7TravelPalHT2023.Classes;
+using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023;
 
@@ -8,10 +11,32 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private User user;
     public MainWindow()
     {
         InitializeComponent();
+        this.user = user;
 
+        user = new User
+        {
+            Username = "user",
+            Password = "password",
+            SelectedCountry = Countries.United_States,
+            Countries = Countries.Sweden,
+        };
+
+        // Skapa en ny lista för att spara userns destinations
+        List<Travel> userDestinations = new List<Travel>
+        {
+            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
+            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
+        };
+
+        //  Lägger in den nya traveln till user.listan
+        user.Destinations = userDestinations;
+
+        //  Lägger till usern i userManager listan
+        UserManager.AddUser(user);
     }
 
     private void btnLogIn(object sender, RoutedEventArgs e)
@@ -22,11 +47,23 @@ public partial class MainWindow : Window
 
         if (user != null)
         {
-            UserManager.signInUser = user; // Ser vem som loggar in
-            MessageBox.Show("Login successful.");
-            //TravelManager.Reset(); // Resettar för alla.. blir lite fel..
-            TravelsWindow travelsWindow = new TravelsWindow();
-            travelsWindow.Show();
+            UserManager.signInUser = user; // Set the signed-in user
+
+            if (user is User)
+            {
+                // Handle User-specific actions
+                MessageBox.Show("User logged in successfully.");
+                TravelsWindow travelsWindow = new TravelsWindow((User)user);
+                travelsWindow.Show();
+            }
+            else if (user is Admin)
+            {
+                // Handle Admin-specific actions
+                MessageBox.Show("Admin logged in successfully.");
+                AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow();
+                adminOnlyWindow.Show();
+            }
+
             Close();
         }
         else
