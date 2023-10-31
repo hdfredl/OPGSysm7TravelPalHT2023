@@ -40,9 +40,9 @@ public partial class RegisterWindow : Window
             {
                 MessageBox.Show("Username and password are required with at least 3 letters");
             }
-            else if (cbCitizenOfBothEnumLists.SelectedItem == null)
+            else if (cbCitizenOfBothEnumLists.SelectedIndex == -1)
             {
-                throw new NullReferenceException("Please select a country"); // Lagt till Try-catch för att inte krascha programmet när comboboxen inte var vald. 
+                MessageBox.Show("Please select a country"); // Lagt till Try-catch för att inte krascha programmet när comboboxen inte var vald. 
             }
             else if (cbCitizenOfBothEnumLists.SelectedItem is Countries selectedCountry)
             {

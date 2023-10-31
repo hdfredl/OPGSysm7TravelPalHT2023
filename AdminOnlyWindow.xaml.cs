@@ -12,9 +12,12 @@ public partial class AdminOnlyWindow : Window
 {
     private Admin admin;
     private User user;
-    public AdminOnlyWindow()
+    private bool isAdmin;
+    private List<Travel> allUserTravels;
+    public AdminOnlyWindow(Admin admin, bool isAdmin)
     {
         InitializeComponent();
+        this.isAdmin = isAdmin;
         this.admin = admin;
         this.user = user;
 
@@ -23,20 +26,9 @@ public partial class AdminOnlyWindow : Window
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
         }
 
-        /*  List<object> userList = new List<object>();*/ // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
-
-        //foreach (IUser user in UserManager.Users) // Avvakta med denna för delete av user.
-        //{
-        //    userList.Add(user);
-        //}
-
-        //foreach (Travel travel in TravelManager.Travels)
-        //{
-        //    userList.Add(travel);
-        //}
-
+        allUserTravels = new List<Travel>(); // Initialize at the class level
+        lstTravels.ItemsSource = allUserTravels; // Set the initial ItemsSource
         UpdateUI();
-        /*lstTravels.ItemsSource = userList;*/// adderar bägge till listview.
     }
 
     private void btnDetailsWindow(object sender, RoutedEventArgs e)
@@ -46,7 +38,7 @@ public partial class AdminOnlyWindow : Window
         {
             Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!);
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!, isAdmin, admin);
             travelDetailsWindow.Show();
             Close();
         }
@@ -57,32 +49,27 @@ public partial class AdminOnlyWindow : Window
     }
     private void btnRemove(object sender, RoutedEventArgs e)
     {
+
         try
         {
-            if (lstTravels.SelectedItem != null) // listan är selected.
+            Travel selectedTravel = lstTravels.SelectedItem as Travel;
+
+            if (selectedTravel != null)
             {
-                if (lstTravels.SelectedItem is IUser selectedUser)
-                {
-                    UserManager.RemoveUser(selectedUser);
+                TravelManager.RemoveTravel(selectedTravel.AccessAllUser, selectedTravel); // selectedTravel.AccessAllUsers tas bort från Travel klassen.
 
-                }
-                else if (lstTravels.SelectedItem is Travel selectedTravel)
-                {
-                    TravelManager.RemoveTravel(selectedTravel);
-                }
-
+                // Updatera allUserTravels list med resterande resor om det finns.
                 UpdateUI();
             }
             else
             {
-                MessageBox.Show("Select a user or travel to remove.", "Warning", MessageBoxButton.OK);
+                MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
             }
         }
-        catch (Exception ex)
+        catch (NullReferenceException message)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show("Something is wrong: " + message.Message);
         }
-        // TODO: Updatera listan så traveln försvinner
     }
 
     private void btnSignOut(object sender, RoutedEventArgs e)
@@ -93,6 +80,38 @@ public partial class AdminOnlyWindow : Window
 
     }
 
+
+    private void UpdateUI()
+    {
+        allUserTravels.Clear();
+        foreach (IUser user in UserManager.Users)
+        {
+            foreach (Travel travel in user.Destinations)
+            {
+                allUserTravels.Add(travel);
+            }
+
+        }
+
+        lstTravels.ItemsSource = allUserTravels;
+        lstTravels.Items.Refresh();
+    }
+
+    //private void UpdateUI()
+    //{
+    //    lstTravels.Items.Clear();
+
+    //    if (UserManager.signInUser is User currentUser)
+    //    {
+    //        foreach (Travel travel in currentUser.Destinations)
+    //        {
+    //            lstTravels.Items.Add(travel);
+    //        }
+    //    }
+    //}
+
+
+
     //private void btnGoBack(object sender, RoutedEventArgs e)
     //{
     //    TravelsWindow travelsWindow = new TravelsWindow(this.user);
@@ -100,62 +119,5 @@ public partial class AdminOnlyWindow : Window
     //    Close();
     //}
 
-    private void UpdateUI()
-    {
-        lstTravels.ItemsSource = null; // Clear the data 
-        List<Travel> allUserTravels = new List<Travel>();
-
-        foreach (IUser user in UserManager.Users)
-        {
-            if (user.Username != "admin")
-            {
-                foreach (Travel travel in user.Destinations)
-                {
-                    allUserTravels.Add(travel);
-                }
-            }
-        }
-
-        lstTravels.ItemsSource = allUserTravels;
-    }
 }
 
-
-//private void UpdateUI()
-//{
-//    lstTravels.ItemsSource = null; // Clear datan 
-//    List<object> userList = new List<object>();
-
-//    foreach (IUser user in UserManager.Users)
-//    {
-//        userList.Add(user);
-//    }
-
-//    foreach (Travel travel in user.Destinations)
-//    {
-//        userList.Add(travel);
-//    }
-
-//    lstTravels.ItemsSource = userList;
-//}
-
-//private void UpdatingAllUI()
-//{
-//    List<object> userList = new List<object>(); // Skapar en lista för User o Travel som object så kan den hålla båda iuser o travel.
-//    lstTravels.Items.Clear();
-//    foreach (IUser user in UserManager.Users) // lägger till användarens namn
-//    {
-//        userList.Add(user);
-
-//        foreach (Travel travel in user.Destinations) // lägger till användarens destinations
-//        {
-//            userList.Add(travel);
-
-//        }
-//    }
-//    foreach (Travel travel in TravelManager.Travels) // lägger till Travels lista
-//    {
-//        userList.Add(travel);
-//    }
-//    lstTravels.ItemsSource = userList;
-//}

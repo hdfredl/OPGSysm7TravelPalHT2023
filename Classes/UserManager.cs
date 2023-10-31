@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023.Classes;
@@ -18,6 +19,36 @@ public static class UserManager
             Password = "adminpassword",
             Countries = Countries.United_States
         }); // Hårdkodad Admin.
+    }
+
+    public static void CreateUser()
+    {
+        User user = new User
+        {
+            Username = "user",
+            Password = "password",
+            SelectedCountry = Countries.United_States,
+            Countries = Countries.Sweden,
+        };
+
+        // Skapa en ny lista för att spara userns destinations
+        List<Travel> userDestinations = new List<Travel>
+        {
+            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now, user), // skapa en user här / lägghe till
+            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now,user) // lägger till en user för en hårdkodade.
+        };
+
+        //  Lägger in den nya traveln till user.listan
+        user.Destinations = userDestinations;
+
+        foreach (Travel travel in user.Destinations)
+        {
+            TravelManager.AddTravel(travel);
+        }
+
+        //  Lägger till usern i Users listan
+        AddUser(user);
+
     }
 
     public static void AddUser(IUser user)

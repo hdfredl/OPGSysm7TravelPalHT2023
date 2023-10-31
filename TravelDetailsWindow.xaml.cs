@@ -10,12 +10,16 @@ public partial class TravelDetailsWindow : Window
 {
     private Travel selectedTrip;
     private User user;
+    private bool isAdmin;
+    private Admin admin;
 
-    public TravelDetailsWindow(Travel travel)
+    public TravelDetailsWindow(Travel travel, bool isAdmin, Admin admin)
     {
         InitializeComponent();
         this.user = user;
         this.selectedTrip = travel;
+        this.isAdmin = isAdmin;
+        this.admin = admin;
 
         if (UserManager.signInUser != null)
         {
@@ -54,8 +58,16 @@ public partial class TravelDetailsWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        TravelsWindow travelsWindow = new TravelsWindow(user);
-        travelsWindow.Show();
+        if (isAdmin)
+        {
+            AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow(admin, true); // admin is undefined here
+            adminOnlyWindow.Show();
+        }
+        else
+        {
+            TravelsWindow travelsWindow = new TravelsWindow(user, false, admin);
+            travelsWindow.Show();
+        }
         Close();
     }
     private void btnSignOut(object sender, RoutedEventArgs e)

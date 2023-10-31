@@ -17,8 +17,9 @@ public class Travel
     public int TravelDays { get; set; }
     public bool AllInclusive { get; set; }
     public string MeetingDetails { get; set; }
+    public User AccessAllUser { get; set; } // För att komma åt användare i Admin sen
 
-    public Travel(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate) // List<PackingListItem> packingList, // Props
+    public Travel(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate, User user) // List<PackingListItem> packingList, // Props
     {
         Destination = destination;
         SelectedCountry = country;
@@ -29,6 +30,7 @@ public class Travel
         StartDate = startDate;
         EndDate = endDate;
         TravelDays = CalculateTravelDays();
+        AccessAllUser = user;
     }
     public virtual string GetInfo()
     {
@@ -44,8 +46,8 @@ public class Travel
     {
         public string MeetingDetails { get; set; }  // string MeetingDetails
 
-        public WorkTrip(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails)
-            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate) // packingList,
+        public WorkTrip(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails, User user)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user) // packingList,
         {
             MeetingDetails = meetingDetails;
         }
@@ -63,8 +65,8 @@ public class Travel
     {
         public bool AllInclusive { get; set; } // bool AllInclusive
 
-        public Vacation(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive)
-            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate) //packingList,
+        public Vacation(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive, User user)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user) //packingList,
         {
             AllInclusive = allInclusive;
         }

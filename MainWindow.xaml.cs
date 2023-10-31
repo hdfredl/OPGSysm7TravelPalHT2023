@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using OPGSysm7TravelPalHT2023.Classes;
-using OPGSysm7TravelPalHT2023.Enums;
 
 namespace OPGSysm7TravelPalHT2023;
 
@@ -12,31 +9,20 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class MainWindow : Window
 {
     private User user;
+    private Admin admin;
+    private bool isAdmin;
     public MainWindow()
     {
         InitializeComponent();
         this.user = user;
+        this.admin = admin;
+        this.isAdmin = isAdmin;
 
-        user = new User
+        if (UserManager.Users.Count == 1) // om det finns redan 1 user så skapas inte en till
         {
-            Username = "user",
-            Password = "password",
-            SelectedCountry = Countries.United_States,
-            Countries = Countries.Sweden,
-        };
+            UserManager.CreateUser();
+        }
 
-        // Skapa en ny lista för att spara userns destinations
-        List<Travel> userDestinations = new List<Travel>
-        {
-            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now),
-            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now)
-        };
-
-        //  Lägger in den nya traveln till user.listan
-        user.Destinations = userDestinations;
-
-        //  Lägger till usern i userManager listan
-        UserManager.AddUser(user);
     }
 
     private void btnLogIn(object sender, RoutedEventArgs e)
@@ -53,14 +39,14 @@ public partial class MainWindow : Window
             {
                 // Handle User-specific actions
                 MessageBox.Show("User logged in successfully.");
-                TravelsWindow travelsWindow = new TravelsWindow((User)user);
+                TravelsWindow travelsWindow = new TravelsWindow(this.user, isAdmin, admin);
                 travelsWindow.Show();
             }
             else if (user is Admin)
             {
                 // Handle Admin-specific actions
                 MessageBox.Show("Admin logged in successfully.");
-                AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow();
+                AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow((Admin)user, true);
                 adminOnlyWindow.Show();
             }
 

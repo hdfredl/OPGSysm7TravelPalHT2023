@@ -11,12 +11,18 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class AddTravelWindow : Window
 {
+
     private User user;
+    private Admin admin;
+    private bool isAdmin;
+
     public AddTravelWindow(User user)
     {
         InitializeComponent();
 
         this.user = user;
+        this.admin = admin;
+        this.isAdmin = isAdmin;
 
         if (UserManager.signInUser != null)
         {
@@ -96,7 +102,7 @@ public partial class AddTravelWindow : Window
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
-                        Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate); // user.SelectedCountry hänger på från register,Main,TravelWindow.
+                        Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate, user); // user.SelectedCountry hänger på från register,Main,TravelWindow.
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;
@@ -111,11 +117,11 @@ public partial class AddTravelWindow : Window
                             isAllInclusive = true;
                         }
                         newTravel.AllInclusive = isAllInclusive;
-
+                        newTravel.AccessAllUser = user; // Aktuell user / signedinUser / medtagen user i private längre upp - "blir" AccessAllUser.
                         user.Destinations.Add(newTravel);
                         keepAdding = false;
 
-                        TravelsWindow travelsWindow = new TravelsWindow(user);
+                        TravelsWindow travelsWindow = new TravelsWindow(user, isAdmin, admin);
                         travelsWindow.Show();
                         Close();
                     }
@@ -141,7 +147,7 @@ public partial class AddTravelWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        TravelsWindow travelsWindow = new TravelsWindow(user);
+        TravelsWindow travelsWindow = new TravelsWindow(user, isAdmin, admin);
         travelsWindow.Show();
         Close();
     }

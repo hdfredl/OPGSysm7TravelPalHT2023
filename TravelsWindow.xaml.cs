@@ -10,10 +10,14 @@ namespace OPGSysm7TravelPalHT2023;
 public partial class TravelsWindow : Window
 {
     private User user;
-    public TravelsWindow(User user)
+    private bool isAdmin;
+    private Admin admin;
+    public TravelsWindow(User user, bool isAdmin, Admin admin)
     {
         InitializeComponent();
+        this.isAdmin = isAdmin;
         this.user = user;
+        this.admin = admin;
 
         if (UserManager.signInUser != null)
         {
@@ -29,19 +33,41 @@ public partial class TravelsWindow : Window
 
             }
         }
+
         UpdateUI();
     }
 
     private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
     {
-        try // WORKING MODELL.
+        //try // fungerande MODELL... funkade innan man börja slänga ihop windows med varandra!!!!! :( 
+        //{
+        //    Travel? selectedItem = lstTravels.SelectedItem as Travel;
+
+        //    if (selectedItem != null)
+        //    {
+        //        TravelManager.RemoveTravel(selectedItem); <- Något fel här.. !! lol
+        //        UpdateUI();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
+        //    }
+        //}
+        //catch (NullReferenceException message)
+        //{
+        //    MessageBox.Show("Something is wrong: " + message.Message);
+        //}
+        try
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
 
             if (selectedItem != null)
             {
-                TravelManager.RemoveTravel(selectedItem);
-                UpdateUI();
+                if (UserManager.signInUser is User currentUser)
+                {
+                    TravelManager.RemoveTravel(currentUser, selectedItem); // Nu funkar metoden för att bort selectedItem och i sin tur Users Destinations :D!!! 
+                    UpdateUI();
+                }
             }
             else
             {
@@ -50,8 +76,9 @@ public partial class TravelsWindow : Window
         }
         catch (NullReferenceException message)
         {
-            MessageBox.Show(message.Message);
+            MessageBox.Show("Something is wrong: " + message.Message);
         }
+
     }
 
     private void btnHelpInfo(object sender, RoutedEventArgs e)
@@ -65,7 +92,7 @@ public partial class TravelsWindow : Window
         if (lstTravels.SelectedItem != null)
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem);
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem, isAdmin, admin);
             travelDetailsWindow.Show();
             Close();
         }
@@ -99,9 +126,13 @@ public partial class TravelsWindow : Window
     private void UpdateUI()
     {
         lstTravels.Items.Clear();
-        foreach (Travel travel in user.Destinations) // static list är tom nu, bör ändras. 
+
+        if (UserManager.signInUser is User currentUser)
         {
-            lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
+            foreach (Travel travel in currentUser.Destinations)
+            {
+                lstTravels.Items.Add(travel);
+            }
         }
     }
 
@@ -114,7 +145,7 @@ public partial class TravelsWindow : Window
 
     private void btnAdminOnly(object sender, RoutedEventArgs e)
     {
-        AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow();
+        AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow(admin, false);
         adminOnlyWindow.Show();
         Close();
 

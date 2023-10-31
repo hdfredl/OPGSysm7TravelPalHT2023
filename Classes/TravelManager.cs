@@ -14,12 +14,17 @@ public static class TravelManager
         }
     }
 
-    public static void RemoveTravel(Travel travel)
+    public static void RemoveTravel(User user, Travel travel)
     {
-        Travels.Remove(travel);
+        if (user != null && travel != null)
+        {
+            user.Destinations.Remove(travel); // hade innan Travels, gjorde denna för att kunna ta bort från User Destinations. 
+        }
     }
-    public static void Reset()
-    {
-        Travels = new List<Travel>(); // Skapa ny lista för att tömma ListViewen
-    }
+
+
+    //public static void Reset()
+    //{
+    //    Travels = new List<Travel>(); // Skapa ny lista för att tömma ListViewen
+    //}
 }
