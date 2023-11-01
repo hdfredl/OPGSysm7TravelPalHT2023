@@ -33,9 +33,8 @@ public partial class AddTravelWindow : Window
         UpdateCountryComboBox(Countries.Sweden);
     }
 
-    private void CategoryBox()
+    private void CategoryBox() // laddar in worktrip eller vacation combobox
     {
-        //cbCategory.Items.Add(new ComboBoxItem { Content = "Trip Category" }); //{ Content = "Trip Category" }
         foreach (WorkOrVacation workOrVacation in Enum.GetValues(typeof(WorkOrVacation)))
         {
             ComboBoxItem item = new(); // ListViewItem
@@ -46,9 +45,9 @@ public partial class AddTravelWindow : Window
         cbCategory.SelectedIndex = 0;
     }
 
-    private void CountryBox()
+    private void CountryBox() // laddar in länder i combobox
     {
-        cbEUorCountries.Items.Add(new ComboBoxItem { Content = "Country" }); // cbEUorCountries.Items.Add("Country");
+        cbEUorCountries.Items.Add(new ComboBoxItem { Content = "Country" }); // 
         foreach (Countries countries in Enum.GetValues(typeof(Countries)))
         {
             ComboBoxItem item = new();
@@ -59,7 +58,7 @@ public partial class AddTravelWindow : Window
         cbEUorCountries.SelectedIndex = 0;
     }
 
-    private void UpdateCountryComboBox(Enum selectedCountry)
+    private void UpdateCountryComboBox(Enum selectedCountry) // hade innan för att ladda in EU länderna i comboboxen, för VG. Jobbar på det.
     {
         cbEUorCountries.Items.Clear();
 
@@ -111,7 +110,7 @@ public partial class AddTravelWindow : Window
                         newTravel.EndDate = endDate;
 
                         bool isAllInclusive = false;
-                        if (checkBoxAllInclusive.IsChecked == true)
+                        if (checkBoxAllInclusive.IsChecked == true) // logic för checkbox allinclusive
                         {
                             isAllInclusive = true;
                         }
