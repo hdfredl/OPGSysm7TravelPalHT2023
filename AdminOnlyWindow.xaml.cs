@@ -26,8 +26,8 @@ public partial class AdminOnlyWindow : Window
             lblUser.Content = UserManager.signInUser.Username; // Lägger in inloggade user här på lblUser så dens namn syns i rutan.
         }
 
-        allUserTravels = new List<Travel>(); // Initialize at the class level
-        lstTravels.ItemsSource = allUserTravels; // Set the initial ItemsSource
+        allUserTravels = new List<Travel>(); // Startar en ny Lista som heter allUserTravels
+        lstTravels.ItemsSource = allUserTravels; // sätter allUserTravels till i lstRavels Itemsource
         UpdateUI();
     }
 
@@ -49,10 +49,9 @@ public partial class AdminOnlyWindow : Window
     }
     private void btnRemove(object sender, RoutedEventArgs e)
     {
-
-        try
+        try // Logik för att ta bort en resa från en "user"
         {
-            Travel selectedTravel = lstTravels.SelectedItem as Travel;
+            Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
             if (selectedTravel != null)
             {
@@ -77,11 +76,10 @@ public partial class AdminOnlyWindow : Window
         MainWindow mainWindow = new MainWindow();
         mainWindow.Show();
         Close();
-
     }
 
 
-    private void UpdateUI()
+    private void UpdateUI() // uppdaterar listview, foreachar genom alla users och sen igenom uer.Destinations.
     {
         allUserTravels.Clear();
         foreach (IUser user in UserManager.Users)
@@ -90,34 +88,9 @@ public partial class AdminOnlyWindow : Window
             {
                 allUserTravels.Add(travel);
             }
-
         }
-
         lstTravels.ItemsSource = allUserTravels;
         lstTravels.Items.Refresh();
     }
-
-    //private void UpdateUI()
-    //{
-    //    lstTravels.Items.Clear();
-
-    //    if (UserManager.signInUser is User currentUser)
-    //    {
-    //        foreach (Travel travel in currentUser.Destinations)
-    //        {
-    //            lstTravels.Items.Add(travel);
-    //        }
-    //    }
-    //}
-
-
-
-    //private void btnGoBack(object sender, RoutedEventArgs e)
-    //{
-    //    TravelsWindow travelsWindow = new TravelsWindow(this.user);
-    //    travelsWindow.Show();
-    //    Close();
-    //}
-
 }
 

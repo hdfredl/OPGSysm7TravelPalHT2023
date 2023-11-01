@@ -23,7 +23,6 @@ public class Travel
     {
         Destination = destination;
         SelectedCountry = country;
-        //EuropeanCountry = europeanCountry;
         Countries = countries;
         Travelers = travellers;
         WorkOrVacation = workorvacation;
@@ -36,7 +35,7 @@ public class Travel
     {
         return $"Destination: {Destination} ,Travelling to: {Countries}, Citizen of: {SelectedCountry} , Travelers: {Travelers}, Start Date: {StartDate}, End Date: {EndDate}, Travel Days: {TravelDays}";
     }
-    private int CalculateTravelDays()
+    private int CalculateTravelDays() // Räkna resedagar
     {
         TimeSpan travellingdays = EndDate - StartDate;
         return travellingdays.Days;

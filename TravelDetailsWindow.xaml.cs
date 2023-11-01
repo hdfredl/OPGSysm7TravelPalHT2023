@@ -58,9 +58,9 @@ public partial class TravelDetailsWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        if (isAdmin)
+        if (isAdmin) // Logic för att gå tibllaka som user eller admin om man är inne
         {
-            AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow(admin, true); // admin is undefined here
+            AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow(admin, true);
             adminOnlyWindow.Show();
         }
         else

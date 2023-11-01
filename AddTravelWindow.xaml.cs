@@ -11,7 +11,6 @@ namespace OPGSysm7TravelPalHT2023;
 /// </summary>
 public partial class AddTravelWindow : Window
 {
-
     private User user;
     private Admin admin;
     private bool isAdmin;
@@ -74,7 +73,7 @@ public partial class AddTravelWindow : Window
     }
     private void btnSaveNAdd(object sender, RoutedEventArgs e)
     {
-        try
+        try // lägga till användare
         {
             bool keepAdding = true;
 
@@ -86,7 +85,7 @@ public partial class AddTravelWindow : Window
 
                 WorkOrVacation workorvacation = (WorkOrVacation)((ComboBoxItem)cbCategory.SelectedItem).Tag;
 
-                object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor som EU counry o Countries.
+                object selectedCountry = cbEUorCountries.SelectedItem; // object kan hålla flera listor som EU counry o Countries, i detta fall för selecteduser och country.
                 Countries countries = user.SelectedCountry; // kommer med från selectedCountry - Register
                 Countries country = 0; // Här kan vi välja över med en ny resa.. " Depart to.. "
 
@@ -98,7 +97,7 @@ public partial class AddTravelWindow : Window
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
                 DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
 
-                if (int.TryParse(txtTravelers.Text, out travellers))
+                if (int.TryParse(txtTravelers.Text, out travellers)) // logic för att spara /add ny travel/user.Destinations.
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
@@ -161,7 +160,7 @@ public partial class AddTravelWindow : Window
 
     private void cbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        ComboBoxItem selectedItem = (ComboBoxItem)cbCategory.SelectedItem;
+        ComboBoxItem selectedItem = (ComboBoxItem)cbCategory.SelectedItem; // logik för work tirp eller vacation
 
         if (selectedItem.Content.ToString() == "WorkTrip")
         {

@@ -18,14 +18,14 @@ public partial class MainWindow : Window
         this.admin = admin;
         this.isAdmin = isAdmin;
 
-        if (UserManager.Users.Count == 1) // om det finns redan 1 user så skapas inte en till
+        if (UserManager.Users.Count == 1) // om det finns redan 1 user (+admin) så skapas inte en till (hårdkodad)
         {
             UserManager.CreateUser();
         }
 
     }
 
-    private void btnLogIn(object sender, RoutedEventArgs e)
+    private void btnLogIn(object sender, RoutedEventArgs e) // för att logga in
     {
         string username = txtUserNameLogIn.Text;
         string password = txtPassWordLogin.Password.ToString();
@@ -33,13 +33,13 @@ public partial class MainWindow : Window
 
         if (user != null)
         {
-            UserManager.signInUser = user; // Set the signed-in user
+            UserManager.signInUser = user; // inloggade user
 
             if (user is User)
             {
                 // Handle User-specific actions
                 MessageBox.Show("User logged in successfully.");
-                TravelsWindow travelsWindow = new TravelsWindow(this.user, isAdmin, admin);
+                TravelsWindow travelsWindow = new TravelsWindow(this.user, isAdmin, admin); // skickar med adnvändare/admin tills travelswindow
                 travelsWindow.Show();
             }
             else if (user is Admin)
@@ -65,68 +65,3 @@ public partial class MainWindow : Window
         Close();
     }
 }
-
-// GAMMAL
-
-//private void btnLogIn(object sender, RoutedEventArgs e)
-//{
-//    string username = txtUserNameLogIn.Text;
-//    string password = txtPassWordLogin.Password.ToString();
-//    IUser user = UserManager.AuthenticateUser(username, password);
-
-//    if (user != null)
-//    {
-//        UserManager.signInUser = user; // Ser vem som loggar in
-//        MessageBox.Show("Login successful.");
-//        ////TravelManager.Reset();
-//        //foreach (Travel travel in user.Destinations) // Testa ta bort för att inte lägga till dubbelt
-//        //{
-//        //    TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
-//        //}
-
-//        TravelsWindow travelsWindow = new TravelsWindow();
-//        travelsWindow.Show();
-//        Close();
-//    }
-//    else
-//    {
-//        //MessageBox.Show("Wrong username or password. Please try again.");
-//        lblWrongUserPassword.Visibility = Visibility.Visible;
-//    }
-//}
-
-// GAMMAL MainWindow:
-//public MainWindow()
-//{
-//    InitializeComponent();
-
-//    //IUser existingUser = UserManager.AuthenticateUser("user", "password"); // Starta en ny user som ska ha 2 resor tillagda hårdkodade.
-
-//    //if (existingUser == null)
-//    //{
-//    //    // Skapa ny user
-//    //    User newUser = new User
-//    //    {
-//    //        Username = "user",
-//    //        Password = "password",
-//    //        // adminRole = AdminRole.User, // Inte Admin role, bara vanlig user.
-
-//    //        CountriesWorldWide = Countries.United_States,
-//    //        EuropeanCountry = EuropeanCountry.Sweden,
-//    //    };
-
-//    //    newUser.Destinations = new List<Travel> // Lägger till denna user med denna info som sen displayas i TravelDetailsWindow.
-//    //            {
-//    //             new Travel("Washington", Countries.United_States, EuropeanCountry.Sweden,WorkOrVacation.Vacation ,2, "",DateTime.Today, DateTime.Now), // Destination, TravelCountry, OriginCountry, Travellers, Starttime, Endtime
-//    //             new Travel("Nice", Countries.France, EuropeanCountry.France,WorkOrVacation.WorkTrip , 5,"" , DateTime.Now, DateTime.Now)
-//    //            };
-//    //    foreach (Travel travel in newUser.Destinations)
-//    //    {
-//    //        TravelManager.AddTravel(travel); // Lägger endast till resorna i denna TravelManager Listan, Travels. 
-//    //    }
-//    //    // TODO: Lägg till Detaljerna kring en resa står utskrivna i låsta inputs (city, destinations-land, antal resenärer[travelers] och om det är en Work Trip eller Vacation[ev.meeting details eller om det är allInclusive eller inte] samt packlista).
-//    //    // LÄgger till ny user
-//    //    UserManager.AddUser(newUser);
-
-//    //}
-//}

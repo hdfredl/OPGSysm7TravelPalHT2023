@@ -7,9 +7,9 @@ public class User : IUser
 {
     public string Username { get; set; }
     public string Password { get; set; }
-    public Countries Countries { get; set; } // CountriesWorldWide... får se vad som händer nu
+    public Countries Countries { get; set; } // Usern var den ska travellas
     public EuropeanCountry EuropeanCountry { get; set; }
-    public Countries SelectedCountry { get; set; }
+    public Countries SelectedCountry { get; set; } // Usern vid register sparar deras "citizen" land här
     public List<Travel> Destinations { get; set; }
 
     public User()

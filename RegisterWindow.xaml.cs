@@ -16,7 +16,7 @@ public partial class RegisterWindow : Window
         InitializeComponent();
 
 
-        foreach (Countries countries in Countries.GetValues(typeof(Countries)))
+        foreach (Countries countries in Countries.GetValues(typeof(Countries))) // länder att välja mellan
         {
             cbCitizenOfBothEnumLists.Items.Add(countries);
         }
@@ -31,7 +31,7 @@ public partial class RegisterWindow : Window
 
         try
         {
-            if (IsUsernameTaken(username))
+            if (IsUsernameTaken(username)) // Logik för att skapa en användare.
             {
                 lblVarning.Content = "User already exists";
                 lblVarning.Visibility = Visibility.Visible;
@@ -68,7 +68,7 @@ public partial class RegisterWindow : Window
 
     private bool IsUsernameTaken(string username)
     {
-        foreach (IUser user in UserManager.Users)
+        foreach (IUser user in UserManager.Users) // om namn är taget, så i detta fall går inte "admin" eller "user" att användas om igen
         {
             if (user.Username == username)
             {
@@ -80,7 +80,7 @@ public partial class RegisterWindow : Window
 
     private void btnGoBack(object sender, RoutedEventArgs e)
     {
-        MainWindow mainWindow = new MainWindow();
+        MainWindow mainWindow = new MainWindow(); // Gå tillbaka till Mainwindow.
         mainWindow.Show();
         Close();
     }

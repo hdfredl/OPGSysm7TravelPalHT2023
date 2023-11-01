@@ -12,7 +12,7 @@ public partial class TravelsWindow : Window
     private User user;
     private bool isAdmin;
     private Admin admin;
-    public TravelsWindow(User user, bool isAdmin, Admin admin)
+    public TravelsWindow(User user, bool isAdmin, Admin admin) // tar med user, bool admin , admin hit för att avgöra vem som loggar in
     {
         InitializeComponent();
         this.isAdmin = isAdmin;
@@ -33,31 +33,12 @@ public partial class TravelsWindow : Window
 
             }
         }
-
-        UpdateUI();
+        UpdateUI(); // Cleara listview och lägger till ny travel om så skapas. 
     }
 
-    private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
+    private void btnRemove(object sender, RoutedEventArgs e)
     {
-        //try // fungerande MODELL... funkade innan man börja slänga ihop windows med varandra!!!!! :( 
-        //{
-        //    Travel? selectedItem = lstTravels.SelectedItem as Travel;
-
-        //    if (selectedItem != null)
-        //    {
-        //        TravelManager.RemoveTravel(selectedItem); <- Något fel här.. !! lol
-        //        UpdateUI();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
-        //    }
-        //}
-        //catch (NullReferenceException message)
-        //{
-        //    MessageBox.Show("Something is wrong: " + message.Message);
-        //}
-        try
+        try // logik för att ta bort en vald travel i user.Destinations där man skapar en travel från AddWindow.
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
 
@@ -66,7 +47,7 @@ public partial class TravelsWindow : Window
                 if (UserManager.signInUser is User currentUser)
                 {
                     TravelManager.RemoveTravel(currentUser, selectedItem); // Nu funkar metoden för att bort selectedItem och i sin tur Users Destinations :D!!! 
-                    UpdateUI();
+                    UpdateUI(); // Uppdaterar Listview om någon travel tas bort.
                 }
             }
             else
@@ -78,10 +59,9 @@ public partial class TravelsWindow : Window
         {
             MessageBox.Show("Something is wrong: " + message.Message);
         }
-
     }
 
-    private void btnHelpInfo(object sender, RoutedEventArgs e)
+    private void btnHelpInfo(object sender, RoutedEventArgs e) // random information vid Help klick.
     {
         MessageBox.Show("Press 'User' to edit an user \n Press 'Add Travel' to add more trips \n Press 'Details' to see more information about the trip \n Press 'Help' to see this window \n Press 'Remove' to delete a trip in your list ", "Information");
     }
@@ -92,7 +72,7 @@ public partial class TravelsWindow : Window
         if (lstTravels.SelectedItem != null)
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem, isAdmin, admin);
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem, isAdmin, admin); // Skickar vidare selectedItem/travel och om det är en admin eller ej till TravelDetailsWindow.
             travelDetailsWindow.Show();
             Close();
         }
@@ -106,11 +86,11 @@ public partial class TravelsWindow : Window
     {
         if (UserManager.signInUser is Admin)
         {
-            MessageBox.Show("Not  available for admin, you can only see and delete travels");
+            MessageBox.Show("Not  available for admin, you can only see and delete travels"); // Admin kan inte skapa en travel, skickas ändå inte hit :^). Admin log in skickas direkt till AdminWindow
         }
         else
         {
-            AddTravelWindow addTravelWindow = new AddTravelWindow((User)UserManager.signInUser); // lämna userns parameterar så den följer med när man ska skapa en ny travel.
+            AddTravelWindow addTravelWindow = new AddTravelWindow((User)UserManager.signInUser); // lämnar userns parameterar så den följer med när man ska skapa en ny travel.
             addTravelWindow.Show();
             Close();
         }
@@ -123,11 +103,11 @@ public partial class TravelsWindow : Window
         Close();
     }
 
-    private void UpdateUI()
+    private void UpdateUI() // Uppdaterar Listview 
     {
         lstTravels.Items.Clear();
 
-        if (UserManager.signInUser is User currentUser)
+        if (UserManager.signInUser is User currentUser) // uppdaterar userns user destinations
         {
             foreach (Travel travel in currentUser.Destinations)
             {
@@ -135,8 +115,6 @@ public partial class TravelsWindow : Window
             }
         }
     }
-
-
 
     private void btnUserDetailsWindow(object sender, RoutedEventArgs e)
     {
@@ -148,146 +126,5 @@ public partial class TravelsWindow : Window
         AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow(admin, false);
         adminOnlyWindow.Show();
         Close();
-
     }
 }
-
-
-
-//private void btnRemove(object sender, RoutedEventArgs e) // BUGG HÄR
-//{
-//    //ListViewItem? selectedItem = lstTravels.SelectedItem as ListViewItem;
-//    try
-//    {
-//        Travel? selectedItem = lstTravels.SelectedItem as Travel;
-//        //ListViewItem? deleteTravel = lstTravels.SelectedItem as ListViewItem;
-//        if (selectedItem != null)
-//        {
-//            //Travel? deleteTravel = selectedItem.Tag as Travel;
-//            TravelManager.RemoveTravel(selectedItem);
-//            UpdateUI();
-//        }
-//        //if (result == MessageBoxResult.Yes)
-//        //{
-//        //    /* Travel removeTravel = (Travel)selectedItem.Tag;*/ // Se över denna med ALBIN
-//        //    TravelManager.RemoveTravel(selectedItem); // Tar bort från Travels listan. som lades till i Travels listan i MainWindow.. hmm
-//        //                                              //lstTravels.Items.Remove(deleteTravel);
-//        //}
-//        else
-//        {
-//            MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
-//        }
-
-//    }
-//    catch (NullReferenceException message)
-//    {
-//        MessageBox.Show(message.Message);
-//    }
-//    // TODO: Updatera listan så traveln försvinner
-
-//}
-
-
-
-//private void btnRemove(object sender, RoutedEventArgs e) // Test 2
-//{
-//    //try // WORKING MODELL.
-//    //{
-//    //    Travel? selectedItem = lstTravels.SelectedItem as Travel;
-
-//    //    if (selectedItem != null)
-//    //    {
-//    //        TravelManager.RemoveTravel(selectedItem);
-//    //        UpdateUI();
-//    //    }
-
-//    //    else
-//    //    {
-//    //        MessageBox.Show("Select a travel to remove.", "Warning", MessageBoxButton.OK);
-//    //    }
-
-//    //}
-//    //catch (NullReferenceException message)
-//    //{
-//    //    MessageBox.Show(message.Message);
-//    //}
-
-
-//    Travel deleteTravel = lstTravels.SelectedItem as Travel;
-//    if (deleteTravel != null)
-//    {
-//        TravelManager.RemoveTravel(deleteTravel);
-//    }
-
-//    else if (UserManager.signedInUser is User)
-//    {
-//        Travel deleteTravel = selectedItem.Tag as Travel;
-
-//        TravelManager.RemoveTravel(deleteTravel);
-//    }
-//    else if (UserManager.signedInUser is Admin)
-//    {
-//        Admin admin = (Admin)UserManager.signedInUser;
-//        Travel deleteTravel = selectedItem.Tag as Travel;
-//        foreach (IUser user in UserManager.Users)
-//        {
-//            if (user is User)
-//            {
-//                bool found = false;
-//                foreach (Travel travel in User.Destinations)
-//                {
-//                    if (travel == deleteTravel)
-//                    {
-//                        found = true;
-//                    }
-//                }
-//                if (found)
-//                {
-//                    TravelManager.RemoveTravel(deleteTravel);
-//                }
-//            }
-//        }
-//        AllTravelsAllUsers();
-//    }
-
-//}
-
-//private void AllTravelsAllUsers()
-//{
-//    lstTravels.Items.Clear();
-
-//    if (UserManager.signInUser is User)
-//    {
-//        foreach (Travel travel in TravelManager.Travels)
-//        {
-//            ListViewItem item = new();
-//            item.Content = travel.GetInfo(); // Från Travel.
-//            item.Tag = travel;
-//            lstTravels.Items.Add(item);
-//        }
-//    }
-//    else if (UserManager.signInUser is Admin)
-//    {
-//        foreach (Travel travel in TravelManager.Travels)
-//        {
-//            ListViewItem item = new();
-//            item.Content = travel.GetInfo(); // Från Travel.
-//            item.Tag = travel;
-//            lstTravels.Items.Add(item);
-//        }
-//    }
-
-//}
-
-
-//private void UpdateUI()
-//{
-//    lstTravels.Items.Clear();
-//    foreach (Travel travel in TravelManager.Travels)
-//    {
-//        //ListViewItem item = new ListViewItem();
-//        //item.Content = travel.GetInfo(); // .Destinations
-//        //item.Tag = travel;
-//        lstTravels.Items.Add(travel); //< -Kraschar programmet när man kör den. // item inann.
-//    }
-//}
