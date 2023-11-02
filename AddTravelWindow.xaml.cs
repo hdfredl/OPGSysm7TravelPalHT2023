@@ -40,7 +40,7 @@ public partial class AddTravelWindow : Window
     {
         foreach (WorkOrVacation workOrVacation in Enum.GetValues(typeof(WorkOrVacation)))
         {
-            ComboBoxItem item = new(); // ListViewItem
+            ComboBoxItem item = new();
             item.Content = workOrVacation.ToString();
             item.Tag = workOrVacation;
             cbCategory.Items.Add(item);
@@ -50,7 +50,7 @@ public partial class AddTravelWindow : Window
 
     private void CountryBox() // laddar in länder i combobox
     {
-        cbEUorCountries.Items.Add(new ComboBoxItem { Content = "Country" }); // 
+        cbEUorCountries.Items.Add(new ComboBoxItem { Content = "Country" });
         foreach (Countries countries in Enum.GetValues(typeof(Countries)))
         {
             ComboBoxItem item = new();
@@ -98,9 +98,7 @@ public partial class AddTravelWindow : Window
 
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
                 DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
-                //List<PackingItem> packingItems = new List<PackingItem>(); // Skapar en lista av packingItems från rad 18
 
-                //int quantity;
 
                 if (int.TryParse(txtTravelers.Text, out travellers)) // logic för att spara /add ny travel/user.Destinations.
                 {

@@ -100,26 +100,7 @@ FontSize="20"
 Margin="20"
         
     />
-        <!--<Border Grid.Column="3" - Tillhörde TextBox txtUserName
-        Grid.Row="3"
-        Grid.ColumnSpan="2"
-        Background="White"
-        BorderBrush="MediumSlateBlue"
-        BorderThickness="2"
-        CornerRadius="10"
-        Margin="20">
-          
-        </Border>-->
-
-
-        <!--<Border Grid.Column="3"
-        Grid.Row="4"
-        Grid.ColumnSpan="2"
-        Background="White"
-                BorderBrush="MediumSlateBlue"
-BorderThickness="2"
-        CornerRadius="10"
-        Margin="20">-->
+ 
             <PasswordBox 
         Grid.Column="3"
         Grid.Row="4"
@@ -129,7 +110,7 @@ BorderThickness="2"
                 Name="txtPasswordBox"
         Margin="20"
             />
-        <!--</Border>-->
+     
 
         <Border Grid.Row="6"
         Grid.Column="2"

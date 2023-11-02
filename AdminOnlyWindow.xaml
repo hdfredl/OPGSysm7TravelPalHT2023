@@ -110,20 +110,7 @@
         BorderThickness="0"/>
         </Border>
 
-        <!--<Border Grid.Row="1"
-        Grid.Column="4"
-        Margin="20"
-        Background="MintCream"
-        CornerRadius="10">
-            <Button Content="Go back"
-        Foreground="MediumSlateBlue"
-        Background="Transparent"
-                    Click="btnGoBack"
-           Name="btnAdminMode"
-                    Visibility="Visible"
-        BorderThickness="0">
-            </Button>
-        </Border>-->
+
 
         <Border Grid.Row="6"
         Grid.Column="4"
