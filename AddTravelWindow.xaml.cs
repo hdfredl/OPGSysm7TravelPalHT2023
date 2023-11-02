@@ -98,31 +98,15 @@ public partial class AddTravelWindow : Window
 
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
                 DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
-                List<PackingItem> packingItems = new List<PackingItem>(); // Skapar en lista av packingItems från rad 18
+                //List<PackingItem> packingItems = new List<PackingItem>(); // Skapar en lista av packingItems från rad 18
 
-
+                //int quantity;
 
                 if (int.TryParse(txtTravelers.Text, out travellers)) // logic för att spara /add ny travel/user.Destinations.
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
                         Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate, user, packingItems); // user.SelectedCountry hänger på från register,Main,TravelWindow.
-
-                        newTravel.Destination = destination;
-                        newTravel.Travelers = travellers;
-                        newTravel.MeetingDetails = getInfo;
-                        newTravel.WorkOrVacation = workorvacation;
-                        newTravel.StartDate = startDate;
-                        newTravel.EndDate = endDate;
-                        newTravel.PackingItems = packingItems;
-
-                        PackingItem packingItem = new PackingItem
-                        {
-                            ItemName = txtPacklist.Text,
-                            Quantity = itemQuantity
-                        };
-
-                        packingItems.Add(packingItem);
 
                         bool isAllInclusive = false;
                         if (checkBoxAllInclusive.IsChecked == true) // logic för checkbox allinclusive
@@ -204,13 +188,6 @@ public partial class AddTravelWindow : Window
         }
     }
 
-
-
-    private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
-
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
     {
         // AVVAKTA
@@ -264,6 +241,11 @@ public partial class AddTravelWindow : Window
             packingItems.Remove(selectedPackItem); // tar bort från packingItems listan.
             PackingListUIUpdate();
         }
+
+    }
+
+    private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
+    {
 
     }
 

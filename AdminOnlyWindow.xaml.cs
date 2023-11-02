@@ -38,7 +38,7 @@ public partial class AdminOnlyWindow : Window
         {
             Travel? selectedTravel = lstTravels.SelectedItem as Travel;
 
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!, isAdmin, admin);
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedTravel!, isAdmin, admin, user);
             travelDetailsWindow.Show();
             Close();
         }

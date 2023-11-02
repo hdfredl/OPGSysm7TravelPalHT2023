@@ -72,7 +72,7 @@ public partial class TravelsWindow : Window
         if (lstTravels.SelectedItem != null)
         {
             Travel? selectedItem = lstTravels.SelectedItem as Travel;
-            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem, isAdmin, admin); // Skickar vidare selectedItem/travel och om det är en admin eller ej till TravelDetailsWindow.
+            TravelDetailsWindow travelDetailsWindow = new TravelDetailsWindow(selectedItem, isAdmin, admin, user); // Skickar vidare selectedItem/travel och om det är en admin eller ej till TravelDetailsWindow.
             travelDetailsWindow.Show();
             Close();
         }

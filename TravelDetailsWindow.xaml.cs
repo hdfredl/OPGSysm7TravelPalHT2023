@@ -13,13 +13,29 @@ public partial class TravelDetailsWindow : Window
     private bool isAdmin;
     private Admin admin;
 
-    public TravelDetailsWindow(Travel travel, bool isAdmin, Admin admin)
+    public TravelDetailsWindow(Travel travel, bool isAdmin, Admin admin, User user)
     {
         InitializeComponent();
         this.user = user;
         this.selectedTrip = travel;
         this.isAdmin = isAdmin;
         this.admin = admin;
+
+        if ((int)travel.WorkOrVacation == 1) // Vacation = 1
+        {
+            txtMeetingDetails.Visibility = Visibility.Hidden;
+            lblMeetingDetails.Visibility = Visibility.Hidden;
+            lblAllInclusive.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            txtMeetingDetails.Visibility = Visibility.Visible;
+            lblMeetingDetails.Visibility = Visibility.Visible;
+            lblAllInclusive.Visibility = Visibility.Hidden;
+        }
+
+
+
 
         if (UserManager.signInUser != null)
         {
@@ -33,7 +49,9 @@ public partial class TravelDetailsWindow : Window
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
-        lstPackinglist.Text = selectedTrip.ToString(); // TODO:  för att displaya packinglist
+        /*lstPackinglist = selectedTrip.ToString();*/ // TODO:  för att displaya packinglist
+
+        lstPackinglist.ItemsSource = selectedTrip.PackingItems;
 
         if (selectedTrip is Travel workTrip)
         {

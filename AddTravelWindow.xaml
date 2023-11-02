@@ -398,7 +398,7 @@ Foreground="MediumSlateBlue"
                      Visibility="Visible"
          Width="100" TextChanged="txtMeetingDetails_TextChanged">
 
-               
+               <!--TA BORT SEN OM MAN VÄLJER VACATION-->
             </TextBox>
         </Border>
 
