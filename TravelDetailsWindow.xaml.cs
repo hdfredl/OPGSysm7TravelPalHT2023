@@ -33,6 +33,7 @@ public partial class TravelDetailsWindow : Window
         txtStartDate.Text = selectedTrip.StartDate.ToShortDateString();
         txtEndDate.Text = selectedTrip.EndDate.ToShortDateString();
         txtBio.Text = selectedTrip.GetInfo();
+        lstPackinglist.Text = selectedTrip.ToString(); // TODO:  för att displaya packinglist
 
         if (selectedTrip is Travel workTrip)
         {

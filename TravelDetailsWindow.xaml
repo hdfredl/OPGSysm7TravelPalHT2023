@@ -60,7 +60,6 @@
       
       />
 
-        <!--<CheckBox Name="checkBoxAllInclusive" Content="All Inclusive" />-->
 
         <Border Grid.Column="1"
         Grid.ColumnSpan="5"
@@ -78,38 +77,6 @@
         ></Canvas>
         </Border>
 
-
-        <!--<Border Grid.Row="3"
-        Grid.Column="1"
-        Margin="20"
-        Background="MediumSlateBlue"
-        CornerRadius="10">
-            <Button Content="Save"
-            Foreground="MintCream"
-            Background="Transparent"
-                    Click="btnSave"
-                    Visibility="Hidden"
-            BorderThickness="0">
-            </Button>
-        </Border>-->
-
-
-      
-
-        <!--<Border Grid.Row="4"
-        Grid.Column="1"
-        Margin="20"
-        Background="MediumSlateBlue"
-        CornerRadius="10">
-            <Button Content="Edit"
-        Foreground="MintCream"
-        Background="Transparent"
-                   Click="btnEdit"
-        BorderThickness="0">
-            </Button>
-        </Border>-->
-
-       
 
         <Border Grid.Row="1"
         Grid.Column="2"
@@ -187,7 +154,7 @@ Foreground="MediumSlateBlue"
 />
 
         <Label
-      Grid.Column="5"
+      Grid.Column="4"
       Grid.Row="3"
       Name="lblAllInclusive"
       VerticalAlignment="Center"
@@ -244,24 +211,24 @@ Foreground="MediumSlateBlue"
 
 />
 
-        <!--<Label
-Grid.Column="4"
-Grid.Row="2"
+        <Label
+Grid.Column="5"
+Grid.Row="3"
 Content="Packlist"
-VerticalAlignment="Center"
+VerticalAlignment="Bottom"
 HorizontalAlignment="Center"
 FontFamily="Arial"
 FontSize="15"
 FontWeight="Black"
 Foreground="MediumSlateBlue"
 
-/>-->
+/>
         <Label
 Grid.Column="3"
-Grid.Row="2"
+Grid.Row="3"
 Content="Information"
-VerticalAlignment="Bottom"
-HorizontalAlignment="Right"
+VerticalAlignment="Top"
+HorizontalAlignment="Center"
 FontFamily="Arial"
 FontSize="15"
 FontWeight="Black"
@@ -270,7 +237,7 @@ Foreground="MediumSlateBlue"
 />
 
         <Label
-Grid.Column="5"
+Grid.Column="4"
 Grid.Row="4"
 Content="Meeting details"
 VerticalAlignment="Top"
@@ -295,14 +262,14 @@ Foreground="MediumSlateBlue"
               IsReadOnly="True"
       Width="100">
 
-                <!-- TextBox content and properties -->
+       
             </TextBox>
         </Border>
 
         <Border 
             Grid.Row="3"
 Grid.Column="3"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="1"
 Margin="10 20 10 20"
                Grid.RowSpan="3" 
 BorderBrush="MediumSlateBlue"
@@ -310,18 +277,21 @@ BorderThickness="2"
 CornerRadius="10">
             <TextBox Background="MintCream"
      BorderThickness="0"
-                     
+                     Grid.Column="3"
+                     Grid.Row="3"
+                     Grid.RowSpan="3"
+                     Grid.ColumnSpan="2"
              Name="txtBio"
                      TextWrapping="Wrap"
              IsReadOnly="True"
      Width="250">
 
-                <!-- TextBox content and properties -->
+             
             </TextBox>
         </Border>
 
         <Border Grid.Row="4"
-Grid.Column="5"
+Grid.Column="4"
                 Grid.ColumnSpan="1"
 Margin="10 20 10 20"
                Grid.RowSpan="2" 
@@ -335,7 +305,7 @@ CornerRadius="10">
              IsReadOnly="True"
      Width="100">
 
-                <!-- TextBox content and properties -->
+          
             </TextBox>
         </Border>
 
@@ -352,7 +322,7 @@ CornerRadius="10">
                      IsReadOnly="True"
              Width="100">
                 
-                <!-- TextBox content and properties -->
+              
             </TextBox>
         </Border>
 
@@ -367,7 +337,7 @@ CornerRadius="10">
                      IsReadOnly="True"
                      Name="txtCountry"
      Width="100">
-                <!-- TextBox content and properties -->
+              
             </TextBox>
         </Border>
 
@@ -382,66 +352,37 @@ CornerRadius="10">
                      IsReadOnly="True"
                      Name="txtTravelers"
      Width="100">
-                <!-- TextBox content and properties -->
+               
             </TextBox>
         </Border>
 
- 
 
-        <!--<Border Grid.Row="2"
-                Grid.RowSpan="1"
-Grid.Column="5"
-Margin="0 20 10 20"
-BorderBrush="MediumSlateBlue"
-BorderThickness="2"
-CornerRadius="10">
-            <TextBox Background="MintCream"
-                     TextWrapping="Wrap"
-                     Name="txtPacklist"
-     BorderThickness="0"
-     Width="100">
-                --><!-- TextBox content and properties --><!--
-            </TextBox>
-        </Border>-->
+        <Border Grid.Column="5"
+        Grid.Row="4"
+        Grid.ColumnSpan="1"
+        Grid.RowSpan="3"
+        BorderBrush="MediumSlateBlue"
+                
+        BorderThickness="3"
+                Margin="15"
+        CornerRadius="10">
 
-        <!--<Border Grid.Column="5"
-Grid.Row="3"
-Grid.ColumnSpan="1"
-Grid.RowSpan="2"
-BorderBrush="MediumSlateBlue"
-BorderThickness="2"
-        Margin="20"
-CornerRadius="10">
+            <ListView Grid.Column="1"
+Grid.Row="2"
+Grid.ColumnSpan="5"
+Grid.RowSpan="4"
+            
+Name="lstPackinglist">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="65" Header="Item" DisplayMemberBinding="{Binding ItemName}"/>
+                        <GridViewColumn Width="50" Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
 
-            <ListViewItem>
-                --><!-- ListViewItem content and properties / Binding etc --><!--
-            </ListViewItem>
-        </Border>-->
 
-        <!--<Border Grid.Row="5"
- Grid.Column="4"
- Margin="20"
- Background="MediumSlateBlue"
- CornerRadius="10">
-            <Button Content="Add to list"
- Foreground="MintCream"
- Background="Transparent"
-    Click="btnAddToPacklist"
-                    Visibility="Hidden"
- BorderThickness="0"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
-        <Border Grid.Row="5"
-Grid.Column="5"
-Margin="20"
-Background="MediumSlateBlue"
-CornerRadius="10">
-            <Button Content="Remove from list"
-Foreground="MintCream"
-                    Visibility="Hidden"
-Background="Transparent"
-   Click="btnRemoveFromPacklist"
-BorderThickness="0"/>
-        </Border>-->
 
 
 
@@ -457,7 +398,7 @@ BorderThickness="0"/>
                                Name="txtStartDate"
                                IsReadOnly="True"
                       Width="100">
-                <!-- DatePickerTextBox content and properties -->
+             
             </DatePickerTextBox>
         </Border>
 
@@ -472,7 +413,7 @@ BorderThickness="0"/>
                                Name="txtEndDate"
                                IsReadOnly="True"
                       Width="100">
-                <!-- DatePickerTextBox content and properties -->
+              
             </DatePickerTextBox>
         </Border>
 

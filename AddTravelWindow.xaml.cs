@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using OPGSysm7TravelPalHT2023.Classes;
@@ -14,6 +15,8 @@ public partial class AddTravelWindow : Window
     private User user;
     private Admin admin;
     private bool isAdmin;
+    private List<PackingItem> packingItems = new List<PackingItem>(); // skapar listan här
+    private int itemQuantity; // ctrl + . 
 
     public AddTravelWindow(User user)
     {
@@ -95,12 +98,15 @@ public partial class AddTravelWindow : Window
 
                 DateTime startDate = txtStartDate.SelectedDate ?? DateTime.Now; // ?? om inget datum selectas så får vi DateTime.Now. 
                 DateTime endDate = txtEndDate.SelectedDate ?? DateTime.Now;
+                List<PackingItem> packingItems = new List<PackingItem>(); // Skapar en lista av packingItems från rad 18
+
+
 
                 if (int.TryParse(txtTravelers.Text, out travellers)) // logic för att spara /add ny travel/user.Destinations.
                 {
                     if (destination != "" && travellers != 0 && cbEUorCountries.SelectedIndex > 0 && workorvacation != WorkOrVacation.None) // && travellers != 0
                     {
-                        Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate, user); // user.SelectedCountry hänger på från register,Main,TravelWindow.
+                        Travel newTravel = new Travel(destination, user.SelectedCountry, country, workorvacation, travellers, getInfo, startDate, endDate, user, packingItems); // user.SelectedCountry hänger på från register,Main,TravelWindow.
 
                         newTravel.Destination = destination;
                         newTravel.Travelers = travellers;
@@ -108,12 +114,22 @@ public partial class AddTravelWindow : Window
                         newTravel.WorkOrVacation = workorvacation;
                         newTravel.StartDate = startDate;
                         newTravel.EndDate = endDate;
+                        newTravel.PackingItems = packingItems;
+
+                        PackingItem packingItem = new PackingItem
+                        {
+                            ItemName = txtPacklist.Text,
+                            Quantity = itemQuantity
+                        };
+
+                        packingItems.Add(packingItem);
 
                         bool isAllInclusive = false;
                         if (checkBoxAllInclusive.IsChecked == true) // logic för checkbox allinclusive
                         {
                             isAllInclusive = true;
                         }
+
                         newTravel.AllInclusive = isAllInclusive;
                         newTravel.AccessAllUser = user; // Aktuell user / signedinUser / medtagen user i private längre upp - "blir" AccessAllUser.
                         user.Destinations.Add(newTravel);
@@ -188,6 +204,8 @@ public partial class AddTravelWindow : Window
         }
     }
 
+
+
     private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
     {
 
@@ -196,11 +214,57 @@ public partial class AddTravelWindow : Window
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
     {
         // AVVAKTA
+        string itemName = txtPacklist.Text; // ger den namn
+        if (string.IsNullOrEmpty(itemName))
+        {
+            MessageBox.Show("Enter an item ");
+            return;
+        }
+
+        if (int.TryParse(txtQuantityPackList.Text, out int itemQuantity)) // try parsar här
+        {
+            PackingItem packingItem = new PackingItem
+            {
+                ItemName = txtPacklist.Text,
+                Quantity = itemQuantity
+            };
+            packingItems.Add(packingItem); // lägger till i packingItems listan: rad 18
+
+        }
+        else
+        {
+            MessageBox.Show("Please enter a valid number for the item quantity.", "Warning");
+            return;
+        }
+
+        txtPacklist.Clear();
+        txtQuantityPackList.Clear();
+
+
+        PackingListUIUpdate();
+
+    }
+
+    private void PackingListUIUpdate()
+    {
+        lstPacklingList.Items.Clear();
+
+        foreach (var packingItem in packingItems)
+        {
+            lstPacklingList.Items.Add(packingItem);
+        }
     }
 
     private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
     {
-        // AVVAKTA
+        PackingItem selectedPackItem = lstPacklingList.SelectedItem as PackingItem;
+
+        if (selectedPackItem != null)
+        {
+            packingItems.Remove(selectedPackItem); // tar bort från packingItems listan.
+            PackingListUIUpdate();
+        }
+
     }
 
     private void checkBoxAllInclusive_Checked(object sender, RoutedEventArgs e)

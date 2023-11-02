@@ -31,13 +31,25 @@ public static class UserManager
             Countries = Countries.Sweden,
         };
 
+        List<PackingItem> vacationPackingItems = new List<PackingItem> // skapar lite items som tas med för usern, 
+        {
+             new PackingItem { ItemName = "Socks", Quantity = 3 },
+             new PackingItem { ItemName = "Beanie", Quantity = 2 }
+        };
+        List<PackingItem> workPackingItems = new List<PackingItem>
+        {
+             new PackingItem { ItemName = "Laptop", Quantity = 1 },
+             new PackingItem { ItemName = "Power adapter", Quantity = 1 }
+        };
+
+
         // Skapa en ny lista för att spara userns destinations
         List<Travel> userDestinations = new List<Travel>
         {
-            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now, user), // skapa en user här / lägghe till
-            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now,user) // lägger till en user för en hårdkodade.
+            new Travel("Barcelona", Countries.United_States, Countries.Spain, WorkOrVacation.Vacation, 2, "", DateTime.Today, DateTime.Now, user, vacationPackingItems), // lägger in den i samma user.Destination lista
+            // Skapar 2 hårdkodade resor för "usern"
+            new Travel("Berlin", Countries.France, Countries.Germany, WorkOrVacation.WorkTrip, 5, "", DateTime.Now, DateTime.Now, user, workPackingItems)
         };
-
         //  Lägger in den nya traveln till user.listan
         user.Destinations = userDestinations;
 

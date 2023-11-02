@@ -1,4 +1,6 @@
-﻿namespace OPGSysm7TravelPalHT2023.Classes;
+﻿using System.Collections.Generic;
+
+namespace OPGSysm7TravelPalHT2023.Classes;
 
 public interface PackingListItem
 {
@@ -9,6 +11,8 @@ public class TravelDocument : PackingListItem // har allt i samma class för det
 {
     public string Name { get; set; }
     public bool Required { get; set; }
+
+
 
     public TravelDocument(string name, bool required)
     {
@@ -26,11 +30,13 @@ public class OtherItem : PackingListItem
 {
     public string Name { get; set; }
     public int Quantity { get; set; }
+    public Dictionary<string, int> PackingItems { get; set; }
 
     public OtherItem(string name, int quantity)
     {
         Name = name;
         Quantity = quantity;
+        PackingItems = new Dictionary<string, int>();
     }
 
     public string GetInfo()

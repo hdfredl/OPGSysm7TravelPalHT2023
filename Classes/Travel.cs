@@ -17,9 +17,13 @@ public class Travel
     public int TravelDays { get; set; }
     public bool AllInclusive { get; set; }
     public string MeetingDetails { get; set; }
+    public List<PackingItem> PackingItems { get; set; }
+
+    //public Dictionary<string, int> PackingItems { get; set; } // kanske får ha denna här istället för en egen klass så att man kan addera items o quantities.. följer inte UML Diagram, men lättare att förstå
+
     public User AccessAllUser { get; set; } // För att komma åt användare i Admin sen
 
-    public Travel(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate, User user) // List<PackingListItem> packingList, // Props
+    public Travel(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, DateTime startDate, DateTime endDate, User user, List<PackingItem> packingItems) // List<PackingListItem> packingList, // Props
     {
         Destination = destination;
         SelectedCountry = country;
@@ -30,6 +34,9 @@ public class Travel
         EndDate = endDate;
         TravelDays = CalculateTravelDays();
         AccessAllUser = user;
+        PackingItems = packingItems;
+        //PackingItems = packingItems;
+
     }
     public virtual string GetInfo()
     {
@@ -45,8 +52,8 @@ public class Travel
     {
         public string MeetingDetails { get; set; }  // string MeetingDetails
 
-        public WorkTrip(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails, User user)
-            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user) // packingList,
+        public WorkTrip(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, string meetingDetails, User user, List<PackingItem> packingItems)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user, packingItems) // packingList,
         {
             MeetingDetails = meetingDetails;
         }
@@ -64,8 +71,8 @@ public class Travel
     {
         public bool AllInclusive { get; set; } // bool AllInclusive
 
-        public Vacation(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive, User user)
-            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user) //packingList,
+        public Vacation(string destination, Countries country, Countries countries, WorkOrVacation workorvacation, int travellers, string getInfo, List<PackingListItem> packingList, DateTime startDate, DateTime endDate, bool allInclusive, User user, List<PackingItem> packingItems)
+            : base(destination, country, countries, workorvacation, travellers, getInfo, startDate, endDate, user, packingItems) //packingList,
         {
             AllInclusive = allInclusive;
         }
@@ -85,21 +92,3 @@ public class Travel
     }
 }
 
-
-
-
-
-//public List<PackingListItem> PackingList { get; set; }
-
-
-//public class PackingListItem // Gör om sen kanske.... gjordes nu snabbt för att släcka errors.
-//{
-//    public string? Itemsname { get; set; }
-//    public int Quantity { get; set; }
-//    public PackingListItem(string itemsname, int quantity)
-//    {
-//        Itemsname = itemsname;
-//        Quantity = quantity;
-//    }
-
-//}
