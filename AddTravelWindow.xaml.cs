@@ -23,8 +23,8 @@ public partial class AddTravelWindow : Window
         InitializeComponent();
 
         this.user = user;
-        this.admin = admin;
-        this.isAdmin = isAdmin;
+        //this.admin = admin;
+        //this.isAdmin = isAdmin;
 
         if (UserManager.signInUser != null)
         {
@@ -234,7 +234,7 @@ public partial class AddTravelWindow : Window
 
     private void btnRemoveFromPacklist(object sender, RoutedEventArgs e)
     {
-        PackingItem selectedPackItem = lstPacklingList.SelectedItem as PackingItem;
+        PackingItem selectedPackItem = (PackingItem)lstPacklingList.SelectedItem;
 
         if (selectedPackItem != null)
         {
