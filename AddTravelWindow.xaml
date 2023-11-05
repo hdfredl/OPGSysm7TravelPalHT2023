@@ -164,7 +164,7 @@ Foreground="MediumSlateBlue"
  Grid.ColumnSpan="1"
  Margin="15 20 15 20"
  Background="MintCream"
-            Name="cbEUorCountries"
+            Name="cbEUorCountries" SelectionChanged="cbEUorCountries_SelectionChanged"
  />
 
         <Label
@@ -313,7 +313,9 @@ CornerRadius="10">
                      TextWrapping="Wrap"
                      Name="txtQuantityPackList"
      BorderThickness="0"
+                     Visibility="Visible"
      Width="40">
+                
 
             </TextBox>
         </Border>

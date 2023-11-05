@@ -7,19 +7,19 @@ public class PackingListAndQuantity
 {
     public class PackingListItem : IPackingListItem
     {
-        public string Name { get; }
+        public string Passport { get; }
         public Dictionary<string, int> Quantities { get; set; } // skapa en dicitonary för att hålla en string/item och quantity
 
         public PackingListItem(string name)
         {
-            Name = name;
+            Passport = name;
             Quantities = new Dictionary<string, int>();
         }
 
         public string GetInfo()
         {
             string quantityInfo = string.Join(", ", Quantities.Select(kv => $"{kv.Key}: {kv.Value}"));  // skriver ut infon läsbart
-            return $"Item: {Name}, Quantities: {quantityInfo}";
+            return $"Item: {Passport}, Quantities: {quantityInfo}";
         }
     }
 
@@ -27,7 +27,7 @@ public class PackingListAndQuantity
     {
         public int Quantity { get; set; }
         public string ItemName { get; }
-        public string Name { get; set; }
+        public string Passport { get; set; }
 
         public OtherItem(string name, int quantity)
         {

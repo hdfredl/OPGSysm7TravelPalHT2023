@@ -17,6 +17,8 @@ public partial class AddTravelWindow : Window
     private bool isAdmin;
     private List<PackingItem> packingItems = new List<PackingItem>(); // skapar listan här
     private int itemQuantity; // ctrl + . 
+    private bool Required;
+    private Travel selectedTrip;
 
     public AddTravelWindow(User user)
     {
@@ -26,10 +28,14 @@ public partial class AddTravelWindow : Window
         //this.admin = admin;
         //this.isAdmin = isAdmin;
 
+
+
         if (UserManager.signInUser != null)
         {
             lblUser.Content = UserManager.signInUser.Username;
         }
+
+
 
         CategoryBox();
         CountryBox();
@@ -111,7 +117,7 @@ public partial class AddTravelWindow : Window
                         {
                             isAllInclusive = true;
                         }
-
+                        newTravel.MeetingDetails = getInfo;
                         newTravel.AllInclusive = isAllInclusive;
                         newTravel.AccessAllUser = user; // Aktuell user / signedinUser / medtagen user i private längre upp - "blir" AccessAllUser.
                         user.Destinations.Add(newTravel);
@@ -184,12 +190,29 @@ public partial class AddTravelWindow : Window
 
             borderMeetingDetails.Visibility = Visibility.Collapsed;
         }
+        else
+        {
+            checkBoxAllInclusive.Visibility = Visibility.Collapsed;
+
+            txtMeetingDetails.Visibility = Visibility.Collapsed;
+
+            txtBoxMeetingDetails.Visibility = Visibility.Collapsed;
+
+            txtMeetingDetails.Visibility = Visibility.Collapsed;
+
+            borderMeetingDetails.Visibility = Visibility.Collapsed;
+
+            borderMeetingDetails.Visibility = Visibility.Collapsed;
+        }
     }
 
     private void btnAddToPacklist(object sender, RoutedEventArgs e)
     {
-        // AVVAKTA
+        ////AVVAKTA
         string itemName = txtPacklist.Text; // ger den namn
+        bool travelDocument = (bool)checkBoxTravelDocument.IsChecked; // Påbörjat VG, men hinner ej bli färdig med experimentet osv. Får bygga vidare på denna till lovet eller mitt Crossfit program :D !!
+        bool required = (bool)checkBoxRequired.IsChecked;
+
         if (string.IsNullOrEmpty(itemName))
         {
             MessageBox.Show("Enter an item ");
@@ -198,11 +221,15 @@ public partial class AddTravelWindow : Window
 
         if (int.TryParse(txtQuantityPackList.Text, out int itemQuantity)) // try parsar här
         {
+            TravelDocument newPassPort;
             PackingItem packingItem = new PackingItem
             {
                 ItemName = txtPacklist.Text,
                 Quantity = itemQuantity
             };
+
+
+            //PassportToAdd(required);
             packingItems.Add(packingItem); // lägger till i packingItems listan: rad 18
 
         }
@@ -218,9 +245,11 @@ public partial class AddTravelWindow : Window
 
         PackingListUIUpdate();
 
+
+
     }
 
-    private void PackingListUIUpdate()
+    private void PackingListUIUpdate() // uppdatera listan i addtravelwindow
     {
         lstPacklingList.Items.Clear();
 
@@ -242,26 +271,82 @@ public partial class AddTravelWindow : Window
 
     }
 
+    private void cbEUorCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+
+    }
+
+    private void PassportToAdd(bool required)
+    {
+        // Skapa logik för Traveldocument
+
+        if (checkBoxTravelDocument.IsChecked == true)
+        {
+            if (cbEUorCountries.SelectedIndex >= 0)
+            {
+                Countries selectedCountry = (Countries)cbEUorCountries.SelectedIndex;
+
+                // hämtar metoden - "dum" / tidspressad metod nu när deadline närmar sig hehe
+                List<string> europeanCountries = GetEuropeanCountries();
+
+                // Ser om valt land innehåller "europeanCountries"
+                if (!europeanCountries.Contains(selectedCountry.ToString()))
+                {
+                    TravelDocument passport = new TravelDocument("Passport", required);
+                    lstPacklingList.Items.Add(passport);
+                    PackingListUIUpdate();
+                }
+                else
+                {
+                    //Ta bort passport
+                    PassportToRemove();
+
+                }
+            }
+        }
+        else
+        {
+
+            MessageBox.Show("Please select a TravelDocument");
+        }
+    }
+
+    private void PassportToRemove()
+    {
+        lstPacklingList.Items.Clear();
+        foreach (var passportToRemove in lstPacklingList.Items)
+        {
+            if (passportToRemove is TravelDocument travelDocument && travelDocument.Passport == "Passport")
+            {
+                lstPacklingList.Items.Remove(travelDocument);
+                break;
+            }
+        }
+    }
+
+
+    private List<string> GetEuropeanCountries() // Lol.. / Testar
+    {
+        List<string> europeanCountries = new List<string>
+    {
+        "Austria", "Belgium", "Bulgaria", "Croatia", "Czech Republic", "Denmark",
+        "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland",
+        "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands",
+        "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"
+    };
+
+        return europeanCountries;
+    }
+
     private void txtMeetingDetails_TextChanged(object sender, TextChangedEventArgs e)
     {
-
     }
-
     private void checkBoxAllInclusive_Checked(object sender, RoutedEventArgs e)
     {
-
     }
-
     private void checkBoxMeetingDetails_Checked(object sender, RoutedEventArgs e)
     {
-
     }
-    private void checkBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
-    {
 
-    }
-    private void unCheckBoxNonEUCountries_Checked(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

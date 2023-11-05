@@ -26,12 +26,23 @@ public partial class TravelDetailsWindow : Window
             txtMeetingDetails.Visibility = Visibility.Hidden;
             lblMeetingDetails.Visibility = Visibility.Hidden;
             lblAllInclusive.Visibility = Visibility.Visible;
+
+        }
+        else if ((int)travel.WorkOrVacation == 0)
+        {
+            txtMeetingDetails.Visibility = Visibility.Hidden;
+            lblMeetingDetails.Visibility = Visibility.Hidden;
+            lblAllInclusive.Visibility = Visibility.Hidden;
+            lblAllInclusive.Visibility = Visibility.Hidden;
+
         }
         else
         {
             txtMeetingDetails.Visibility = Visibility.Visible;
+            borderForMeetingDetails.Visibility = Visibility.Visible;
             lblMeetingDetails.Visibility = Visibility.Visible;
             lblAllInclusive.Visibility = Visibility.Hidden;
+
         }
 
 
@@ -70,7 +81,7 @@ public partial class TravelDetailsWindow : Window
             }
             else
             {
-                lblAllInclusive.Content = "Not all inclusive / Work Trip";
+                lblAllInclusive.Content = "Not all inclusive / Worktrip";
             }
         }
     }

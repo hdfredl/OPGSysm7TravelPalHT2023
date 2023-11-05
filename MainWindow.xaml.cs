@@ -37,14 +37,14 @@ public partial class MainWindow : Window
 
             if (user is User)
             {
-                // Handle User-specific actions
+                // Loggar in som user
                 MessageBox.Show("User logged in successfully.");
                 TravelsWindow travelsWindow = new TravelsWindow(this.user, isAdmin, admin); // skickar med adnvändare/admin tills travelswindow
                 travelsWindow.Show();
             }
             else if (user is Admin)
             {
-                // Handle Admin-specific actions
+                // loggar in som admin
                 MessageBox.Show("Admin logged in successfully.");
                 AdminOnlyWindow adminOnlyWindow = new AdminOnlyWindow((Admin)user, true);
                 adminOnlyWindow.Show();

@@ -5,6 +5,7 @@ public class TravelDocuments
     public bool Required { get; set; }
     public string Passport { get; set; }
 
+
     public TravelDocuments(string passport, bool required)
     {
         Passport = passport;

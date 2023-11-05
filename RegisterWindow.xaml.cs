@@ -16,7 +16,7 @@ public partial class RegisterWindow : Window
         InitializeComponent();
 
 
-        foreach (Countries countries in Countries.GetValues(typeof(Countries))) // länder att välja mellan
+        foreach (Countries countries in Enum.GetValues(typeof(Countries))) // länder att välja mellan
         {
             cbCitizenOfBothEnumLists.Items.Add(countries);
         }
